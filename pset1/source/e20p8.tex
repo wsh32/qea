@@ -1,0 +1,13 @@
+A good approximation for the temperature in New York on a given day is given by: 
+
+\begin{align*}
+    T_n = 0.2235T_b + 0.4193T_p + 0.3856T_w
+\end{align*}
+
+Formulate a matrix equation which uses the matrix from the previous part and the formula from the genie to guess the daily temperature in New York for the last year. Apply this equation in MATLAB.
+
+\begin{solution}
+\begin{lstlisting}[language=Matlab]
+t_n = 0.2235 * T_predict(1, :) + 0.4193 * T_predict(2, :) + 0.3856 * T_predict(3, :)
+\end{lstlisting}
+\end{solution}

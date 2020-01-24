@@ -1,0 +1,15 @@
+Please draw the vector $\boldsymbol{x} = \boldsymbol{Rw}$
+
+\begin{solution} \ \\
+\begin{center}
+\begin{tikzpicture}
+  \draw[thin,gray!40] (-2,-2) grid (2,2);
+  \draw[<->] (-2,0)--(2,0) node[right]{$x$};
+  \draw[<->] (0,-2)--(0,2) node[above]{$y$};
+  \draw[line width=2pt,blue,-stealth](0,0)--(1,1) node[anchor=south west]{$\boldsymbol{v}$} coordinate (v);
+  \draw[line width=2pt,red,-stealth](0,0)--(0.371,1.365) node[anchor=south west]{$\boldsymbol{Rv}$} coordinate (rv);
+  \coordinate (origin) at (0, 0);
+  \pic [draw, <->, "$\theta$", anchor=north west] {angle = v--origin--rv};
+\end{tikzpicture}
+\end{center}
+\end{solution}
