@@ -1,0 +1,7 @@
+Predict what would happen if you operate on the original rectangle with $\boldsymbol{STR}$. How about $\boldsymbol{TRS}$? How would you undo each of these operations?
+
+\begin{solution}\ \\
+    The $\boldsymbol{STR}$ matrix rotates the rectangle by $\theta$, translates it by $(t_x, t_y)$, and scales it by $\boldsymbol{S}$. The $\boldsymbol{TRS}$ matrix scales the rectangle by $\boldsymbol{S}$, rotates it by $\theta$, and translates it by $(t_x, t_y)$. \\
+    
+    To undo $\boldsymbol{STR}$, the resulted figure should be multiplied by $\boldsymbol{R}^{-1}\boldsymbol{T}^{-1}\boldsymbol{S}^{-1}$. To undo $\boldsymbol{TRS}$, the resulted figure should be multiplied by $\boldsymbol{S}^{-1}\boldsymbol{R}^{-1}\boldsymbol{T}^{-1}$.
+\end{solution}

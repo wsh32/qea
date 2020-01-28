@@ -1,0 +1,41 @@
+If 
+
+\begin{align*}
+    \boldsymbol{P} = \begin{bmatrix}
+        2 & 1 \\ 4 & 3
+    \end{bmatrix} \\
+    \boldsymbol{B} = \begin{bmatrix}
+        1 & 2 \\ 2 & 3
+    \end{bmatrix}
+\end{align*}
+
+compute $\left(\boldsymbol{PB}\right)^-1$.
+
+\begin{solution}
+    \begin{align*}
+        \det\left(\boldsymbol{B}\right) = -1 \\
+        \boldsymbol{B}^-1 = -1 \begin{bmatrix}
+            3 & -2 \\
+            -2 &  1
+        \end{bmatrix} \\
+        \boldsymbol{B}^-1 = \begin{bmatrix}
+            -3 & 2 \\
+            2 & -1
+        \end{bmatrix}
+    \end{align*}
+    \begin{align*}
+        (\boldsymbol{PB})^-1 = \boldsymbol{P}^-1\boldsymbol{B}^-1 \\
+        (\boldsymbol{PB})^-1 = \begin{bmatrix}
+            \frac{3}{2} & -\frac{1}{2} \\
+            -2 & 1
+        \end{bmatrix}
+        \begin{bmatrix}
+            -3 & 2 \\
+            2 & -1
+        \end{bmatrix}
+        (\boldsymbol{PB})^-1 = \begin{bmatrix}
+            -\frac{17}{2} & \frac{7}{2} \\
+            5 & -2
+        \end{bmatrix}
+    \end{align*}
+\end{solution}

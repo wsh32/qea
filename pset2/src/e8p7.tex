@@ -1,0 +1,22 @@
+How would you generalize translation to 3D?
+
+\begin{solution}
+    The 3D vector matrix should have an extra row, making it:
+    
+    \begin{align*}
+        \begin{bmatrix}
+            x \\ y \\ z \\ 1
+        \end{bmatrix}
+    \end{align*}
+    
+    The 3D transformation matrix is:
+    
+    \begin{align*}
+        \boldsymbol{T} = \begin{bmatrix}
+            1 & 0 & 0 & t_x \\
+            0 & 1 & 0 & t_y \\
+            0 & 0 & 1 & t_z \\
+            0 & 0 & 0 & 1
+        \end{bmatrix}
+    \end{align*}
+\end{solution}

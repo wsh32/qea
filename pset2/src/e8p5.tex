@@ -1,0 +1,5 @@
+Choose a rotation matrix $\boldsymbol{R}$. Predict what would happen if you operate on the original rectangle with $\boldsymbol{TR}$. How about $\boldsymbol{RT}$? How would you undo each of these operations?
+
+\begin{solution}
+    Applying the $\boldsymbol{TR}$ matrix rotates the rectangle, then translates it. Applying the $\boldsymbol{RT}$ matrix translates the rectangle first, then rotates around the origin. This results in the translation also being rotated about the origin. To undo $\boldsymbol{TR}$, apply $\boldsymbol{R}^{-1}\boldsymbol{T}^{-1}$. To undo $\boldsymbol{RT}$, apply $\boldsymbol{T}^{-1}\boldsymbol{R}^{-1}$
+\end{solution}
