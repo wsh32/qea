@@ -18,11 +18,26 @@ elephant = [
     0.0700    0.0000 1;
 ]';
 
-plot(elephant(1, :), elephant(2, :), 'bx-');
+body = [2 1 0.5 2 1 1 2 6 7 7 8 7 7 6 5 5 5 4.5 5 5.5 5 5 3 3 3 2.5 3 3.5 3 3 2;
+        2 4 2   2 4 7 9 9 7 4 5 6 4 2 2 0 1 0   1 0   1 2 2 0 1 0   1 0   1 2 2;
+        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1];
+scale = [
+    0.013 0.000 0;
+    0.000 0.010 0;
+    0.000 0.000 1;
+];
+translate = [
+    1 0 -5;
+    0 1 -5;
+    0 0 1;
+];
+elephant=scale*translate*body;
+
+plot(elephant(1, :), elephant(2, :), 'b-');
 axis(axis_setup);
 
 % Setup
-framerate = 30;
+framerate = 120;
 t_pause = 1 / framerate;
 
 % 1. Run Forward
@@ -41,7 +56,7 @@ for i = 0:runto_frames
     ];
 
     tElephant = transform * elephant;
-    plot(tElephant(1, :), tElephant(2, :), 'bx-');
+    plot(tElephant(1, :), tElephant(2, :), 'b-');
     axis(axis_setup);
     pause(t_pause);
 end
@@ -67,7 +82,7 @@ for i = 0:rollto_frames
     ];
 
     tElephant = transform * elephant;
-    plot(tElephant(1, :), tElephant(2, :), 'bx-');
+    plot(tElephant(1, :), tElephant(2, :), 'b-');
     axis(axis_setup);
     pause(t_pause);
 end
@@ -98,7 +113,7 @@ for i = 0:jumpto_frames
     ];
 
     tElephant = transform * elephant;
-    plot(tElephant(1, :), tElephant(2, :), 'bx-');
+    plot(tElephant(1, :), tElephant(2, :), 'b-');
     axis(axis_setup);
     pause(t_pause);
 end
@@ -106,9 +121,9 @@ end
 % 4. Barrel roll
 start = jumpto;
 rollto = [0.05; 0];
-rollto_frames = 30;
+rollto_frames = 20;
 
-for i = 0:rollto_frames
+for i = 1:rollto_frames
     t_x = (i / rollto_frames) * (rollto(1) - start(1)) + start(1);
     t_y = (i / rollto_frames) * (rollto(2) - start(2)) + start(2);
     theta = (i / rollto_frames) * 2 * pi;
@@ -124,7 +139,7 @@ for i = 0:rollto_frames
     ];
 
     tElephant = transform * elephant;
-    plot(tElephant(1, :), tElephant(2, :), 'bx-');
+    plot(tElephant(1, :), tElephant(2, :), 'b-');
     axis(axis_setup);
     pause(t_pause);
 end
