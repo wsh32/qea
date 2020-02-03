@@ -1,0 +1,21 @@
+Suppose that you know that you have apples and oranges in the fridge and that in the genetically engineered future, the weights of all apples are 3 oz and all oranges are 4 oz. Because of inflation in this genetically engineered future, the price of each apple is \$1 and the price of each orange is \$2. Suppose that you also know that you paid \$13 total for your fruit and the total weight of the fruit is 33 oz. Let $n_o$ and $n_a$ be the numbers of oranges and apples in your fridge respectively, and that you don’t know what these numbers are.
+
+\begin{align*}
+    \boldsymbol{n} = \begin{bmatrix}
+        n_o \\ n_a
+    \end{bmatrix} \\
+    \boldsymbol{d} = \begin{bmatrix}
+        13 \\ 33
+    \end{bmatrix}
+\end{align*}
+
+Write an equation relating $\boldsymbol{n}$ and $\boldsymbol{d}$, using a matrix-vector product.
+
+\begin{solution}
+    \begin{align*}
+        \begin{bmatrix}
+            2 & 1 \\
+        4 & 3
+        \end{bmatrix}\boldsymbol{n} = \boldsymbol{d}
+    \end{align*}
+\end{solution}

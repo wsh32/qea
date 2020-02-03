@@ -1,0 +1,34 @@
+Suppose that the following table describes the stock holdings of three of the QEA instructors. Also suppose that on a given day the value of the Apple, IBM and General Mill’s stock are \$100, \$50, and \$20, respectively. 
+
+\begin{center}
+    \begin{tabular}{| c | c c c|} 
+        \hline
+        & Apple & IBM & General Mills \\
+        \hline
+        Jeff  & 100 & 100 & 100 \\ 
+        Emily & 100 & 200 &   0 \\
+        John  &  50 &  50 & 200 \\
+        \hline
+    \end{tabular}
+\end{center}
+
+What is the total value of the holdings for each professor on the day in question? Can you formulate this as a matrix expression? If so, what is it? If not, why not?
+
+\begin{solution}
+    \begin{align*}
+        \boldsymbol{T} &= \boldsymbol{Hv} \\
+        \boldsymbol{v} &= \begin{bmatrix}
+            100 \\ 50 \\ 20
+        \end{bmatrix} \\
+        \boldsymbol{H} &= \begin{bmatrix}
+            100 & 100 & 100 \\
+            100 & 200 & 0 \\
+            50 & 50 & 200
+        \end{bmatrix} \\
+        \boldsymbol{T} &= \begin{bmatrix}
+            \$17000 \\
+            \$20000 \\
+            \$11500
+        \end{bmatrix}
+    \end{align*}
+\end{solution}

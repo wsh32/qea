@@ -1,0 +1,51 @@
+Now, suppose that you do not know how many shares of each stock are owned by the instructors. However, you know that the total value of the stocks for each instructor for three consecutive days is as given in the following table
+
+\begin{center}
+    \begin{tabular}{| c | c c c|} 
+        \hline
+        & Jeff & Emily & John \\ 
+        \hline
+        Day 1 & \$1500 & \$2600 &  \$950 \\ 
+        Day 2 & \$1600 & \$2810 & \$1020 \\
+        Day 3 & \$1400 & \$2550 & \$1000 \\
+        \hline
+    \end{tabular}
+\end{center}
+
+You also know that the price of each stock on each of the three days was as follows:
+
+\begin{center}
+    \begin{tabular}{| c | c c c|} 
+        \hline
+        & Apple & IBM & General Mills \\
+        \hline
+        Day 1 & \$100 & \$50 & \$20 \\ 
+        Day 2 & \$110 & \$50 & \$22 \\
+        Day 3 & \$100 & \$40 & \$30 \\
+        \hline
+    \end{tabular}
+\end{center}
+
+How many stocks of each company does each professor own? Can you formulate this as a matrix equation? If so, what are the matrices/vectors? If not, why not?
+
+\begin{solution}
+    \begin{align*}
+        \boldsymbol{T} &= \boldsymbol{VH} \\
+        \boldsymbol{T} &= \begin{bmatrix}
+            \$1500 & \$2600 &  \$950 \\ 
+            \$1600 & \$2810 & \$1020 \\
+            \$1400 & \$2550 & \$1000
+        \end{bmatrix} \\
+        \boldsymbol{V} &= \begin{bmatrix}
+            \$100 & \$50 & \$20 \\ 
+            \$110 & \$50 & \$22 \\
+            \$100 & \$40 & \$30
+        \end{bmatrix} \\
+        \boldsymbol{H} &= \boldsymbol{V}^{-1}\boldsymbol{T} \\
+        \boldsymbol{H} &= \begin{bmatrix}
+            10 & 20 &  5 \\
+            10 & 10 &  5 \\
+             0 &  5 & 10
+        \end{bmatrix}
+    \end{align*}
+\end{solution}

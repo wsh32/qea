@@ -1,0 +1,27 @@
+In the following circuit, consider that there is a current $I_1$ going through resistor $R_1$, a current $I_2$ going through resistor $R_2$ and a current $I_3$ going through resistor $R_3$. Find a linear algebra
+expression for the vector of our three unknown currents.
+
+\begin{center}\begin{circuitikz} \draw
+    (0,0) to[battery, l=$v$] (0,4)
+        to[resistor, l=$R_1$] (4,4)
+        to[resistor, l=$R_3$] (4,0)
+        -- (0,0)
+    (4,4) to[resistor, l=$R_2$] (8, 4)
+        -- (8, 0)
+        -- (4, 0)
+    ;
+\end{circuitikz}\end{center}
+
+\begin{solution}
+    \begin{align*}
+        \begin{bmatrix}
+            v \\ 0 \\ 0
+        \end{bmatrix} = \begin{bmatrix}
+            R_1 & 0 & R_3 \\
+            0 & -R_2 & R_3 \\
+            1 & -1 & -1
+        \end{bmatrix} \begin{bmatrix}
+            I_1 \\ I_2 \\ I_3
+        \end{bmatrix}
+    \end{align*}
+\end{solution}
