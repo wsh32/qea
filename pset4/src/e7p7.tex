@@ -1,0 +1,10 @@
+To adjust the contrast, you make a linear mapping of the existing range onto the full 0 to 255 range. In other words, if you think of the current intensity value as your independent variable $x$, and the new intensity value as the dependent variable $y$, a contrast adjustment is defined by a function $y = f(x)$. Propose an equation for a line which gives you the “best” range of y’s, given the input intensity values in the image. You should be able to justify this based on the histogram of the image.
+
+\begin{solution}
+    While the contrast is acceptable, to maximize contrast, we can remap the 9 to 216 range to the full 0 to 255 range. This will also lead to more saturation but better contrast.
+    \begin{align*}
+        y &= f(x) \\
+        f(x) &= \frac{255}{216 - 9}(x - 9) \\
+        f(x) &= \frac{255}{207}x - 11
+    \end{align*}
+\end{solution}

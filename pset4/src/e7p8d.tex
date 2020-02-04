@@ -1,0 +1,19 @@
+Create a figure that includes four subplots: the original image, the original intensity histogram, the new image, and the new intensity histogram.
+
+
+\begin{solution}\ 
+    \begin{lstlisting}[language=Matlab]
+    subplot(2, 2, 1)
+    imshow(face);
+    subplot(2, 2, 2)
+    histogram(face_gray)
+    subplot(2, 2, 3)
+    imshow(face_gray_adj);
+    subplot(2, 2, 4)
+    histogram(face_gray_adj);
+    \end{lstlisting}
+
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{img/e7p8d.png}
+    \end{center}
+\end{solution}

@@ -1,0 +1,15 @@
+By hand, create a histogram of this data. What size bin makes sense? What bin centering makes sense?
+
+\begin{solution} \ \\ \\
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[
+                    ymin=0, ymax=5,
+                    minor y tick num = 1,
+                    area style,
+                    ]
+                \addplot+[ybar interval,mark=no] plot coordinates { (40, 1) (45, 5) (50, 1) (55, 2) (60, 1) (65, 0) };
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+\end{solution}

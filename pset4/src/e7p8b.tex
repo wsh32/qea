@@ -1,0 +1,14 @@
+Analyze the intensity histogram.
+
+\begin{solution}\ 
+    \begin{lstlisting}[language=Matlab]
+    face_gray = rgb2gray(face);
+    histogram(face_gray)
+    \end{lstlisting}
+
+    \begin{center}
+        \includegraphics[width=0.5\textwidth]{img/e7p8b.png}
+    \end{center}
+    
+    There is a clear skew to the left and spike at around 60. Much of this is probably the static background.
+\end{solution}

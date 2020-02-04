@@ -1,0 +1,13 @@
+Find the mean of the intensities in your image data. Find the standard deviation. Is the intensity data well-centered on the available range? The location of the intensity data in the range determines the brightness of the image. How does the standard deviation compare to the available range? Does the intensity data span a good portion of the available range? This affects the contrast.
+
+\begin{solution}\ 
+    \begin{lstlisting}[language=Matlab]
+    X_mean = mean(X_col)
+    X_std = std(im2single(X_col))
+    \end{lstlisting}
+
+    \begin{align*}
+        \mu = 103.9971 \\
+        \sigma = 0.2412
+    \end{align*}
+\end{solution}
