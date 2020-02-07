@@ -1,0 +1,13 @@
+Now find the correlation between pixels across images. Try taking a single column of this matrix and reshape that column into an image. What does that image tell you?
+
+\begin{solution} \
+    \begin{lstlisting}[language=Matlab]
+im_corr = corrcoef(transpose(rdfaces));
+im_corr_adj = reshape(im_corr(:,1), 25, 25);
+imagesc(im_corr_adj)
+    \end{lstlisting}
+    
+    \begin{center}
+        \includegraphics[width=0.5\textwidth]{img/e6p2.png}
+    \end{center}
+\end{solution}

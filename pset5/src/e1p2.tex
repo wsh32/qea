@@ -1,0 +1,11 @@
+Choose your two favorite columns of data from this dataset. Input these into vectors in Matlab. For each of these vectors, subtract off the mean, and then divide out the standard deviation.
+
+\begin{solution}\
+    \begin{lstlisting}[language=Matlab]
+poverty = [15.7; 8.4; 14.7; 17.3; 13.3; 11.4; 9.3; 10.0; 13.2; 14.7; 9.1; 12.6];
+income = [42666; 68460; 50958; 38815; 61021; 56993; 68595; 57989; 47778; 50861; 67214; 47576];
+
+poverty_adj = (poverty - mean(poverty)) / std(poverty);
+income_adj = (income - mean(income)) / std(income);
+    \end{lstlisting}
+\end{solution}

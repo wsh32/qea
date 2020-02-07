@@ -1,0 +1,16 @@
+What would happen if you used this matrix for $a$ instead:
+
+\begin{lstlisting}[language=Matlab]
+a = [(1:10)',(1:10)'/2 -(1:10)']
+\end{lstlisting}
+
+\begin{solution}
+    Because the numbers are negatively correlated, the correlation would be:
+    
+    \begin{align*}
+        \boldsymbol{C} = \begin{bmatrix}
+            1 & -1 \\
+            -1 & 1
+        \end{bmatrix}
+    \end{align*}
+\end{solution}

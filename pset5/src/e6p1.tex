@@ -1,0 +1,23 @@
+Find the correlation between six different images. Which images have the highest correlation?
+
+\begin{solution} \
+    \begin{lstlisting}[language=Matlab]
+faces = test_images(:,:,1:6);
+dfaces = imresize(faces, [25 25]);
+rdfaces = reshape(dfaces, size(dfaces, 1) * size(dfaces, 2), size(dfaces, 3));
+c = corrcoef(rdfaces)
+    \end{lstlisting}
+
+    \begin{align*}
+        \boldsymbol{C} = \begin{bmatrix}
+            1.0000 & 0.8607 & 0.9713 & 0.9520 & 0.9048 & 0.8380 \\
+            0.8607 & 1.0000 & 0.9230 & 0.9497 & 0.8818 & 0.7530 \\
+            0.9713 & 0.9230 & 1.0000 & 0.9763 & 0.8958 & 0.7757 \\
+            0.9520 & 0.9497 & 0.9763 & 1.0000 & 0.9131 & 0.7809 \\
+            0.9048 & 0.8818 & 0.8958 & 0.9131 & 1.0000 & 0.9284 \\
+            0.8380 & 0.7530 & 0.7757 & 0.7809 & 0.9284 & 1.0000
+        \end{bmatrix}
+    \end{align*}
+    
+    The highest correlation is between images 1 and 3.
+\end{solution}

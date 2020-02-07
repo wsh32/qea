@@ -1,0 +1,11 @@
+What is the expression for the correlation matrix between different pixels? What is the size of this correlation matrix?
+
+\begin{solution}
+    To find the correlation matrix, we would take the transpose of the data matrix. This can be found in matlab with: \
+    
+    \begin{lstlisting}[language=Matlab]
+C = corrcoef(data')
+    \end{lstlisting}
+    
+    The size of the correlation matrix is $mn \times mn$.
+\end{solution}

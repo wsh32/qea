@@ -1,0 +1,14 @@
+Use the \texttt{corrcoef} command to compute the correlation coefficients of the original matrix.
+
+\begin{solution} \
+    \begin{lstlisting}[language=Matlab]
+C = corrcoef([poverty_adj income_adj])
+    \end{lstlisting}
+    
+    \begin{align*}
+        \boldsymbol{C} = \begin{bmatrix}
+            1 & -0.9005 \\
+            -0.9005 & 1
+        \end{bmatrix}
+    \end{align*}
+\end{solution}
