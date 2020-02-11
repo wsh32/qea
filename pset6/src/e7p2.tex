@@ -1,0 +1,39 @@
+\begin{align*}
+    \boldsymbol{A} &= \begin{bmatrix}
+        1 & 2 \\
+        3 & 2
+    \end{bmatrix}
+\end{align*}
+
+\begin{solution}
+    \begin{align*}
+        \tr(\boldsymbol{A}) &= 3 \\
+        \det(\boldsymbol{A}) &= -4 \\
+        \lambda^2 - \tr(\boldsymbol{A})\lambda + \det(\boldsymbol{A}) &= 0 \\
+        \lambda^2 - 3\lambda - 4 &= 0 \\
+        (\lambda - 4)(\lambda + 1) &= 0 \\
+        \lambda_1 &= -1 \\
+        \lambda_2 &= 4 \\
+        \\
+        \boldsymbol{Av} &= \lambda\boldsymbol{v} \\
+        \boldsymbol{Av}_1 &= \lambda_1\boldsymbol{v}_1 \\
+        \begin{bmatrix}
+            2 & 2 \\
+            3 & 3
+        \end{bmatrix}\boldsymbol{v}_1 &= \begin{bmatrix}
+            0 \\ 0
+        \end{bmatrix} \\
+        \boldsymbol{v}_1 &= \begin{bmatrix}
+            1 \\ -1
+        \end{bmatrix} \\
+        \begin{bmatrix}
+            -3 & 2 \\
+            3 & -2
+        \end{bmatrix}\boldsymbol{v}_2 &= \begin{bmatrix}
+            0 \\ 0
+        \end{bmatrix} \\
+        \boldsymbol{v}_2 &= \begin{bmatrix}
+            2 \\ 3
+        \end{bmatrix}
+    \end{align*}
+\end{solution}

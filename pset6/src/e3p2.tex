@@ -1,0 +1,10 @@
+Use the solutions of the characteristic equation to prove that $\lambda_1 \lambda_2 = \det(A)$.
+
+\begin{solution}
+    \begin{align*}
+        \lambda &= \frac{\tr(\boldsymbol{A}) \pm \sqrt{\tr(\boldsymbol{A})^2 - 4\det(\boldsymbol{A})}}{2} \\
+        \lambda_1 \lambda_2 &= \frac{\left(\tr(\boldsymbol{A}) + \sqrt{\tr(\boldsymbol{A})^2 - 4\det(\boldsymbol{A})}\right) \times \left(\tr(\boldsymbol{A}) - \sqrt{\tr(\boldsymbol{A})^2 - 4\det(\boldsymbol{A})}\right)}{4} \\
+        \lambda_1 \lambda_2 &= \frac{\tr(\boldsymbol{A})^2 - \left(\tr(\boldsymbol{A})^2 - 4\det(\boldsymbol{A})\right)}{4} \\
+        \lambda_1 \lambda_2 &= \det(\boldsymbol{A}) \\
+    \end{align*}
+\end{solution}

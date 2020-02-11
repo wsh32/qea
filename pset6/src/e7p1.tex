@@ -1,0 +1,41 @@
+Determine the eigenvalues and eigenvectors.
+
+\begin{align*}
+    \boldsymbol{A} &= \begin{bmatrix}
+        4 & 2 \\
+        1 & 3
+    \end{bmatrix}
+\end{align*}
+
+\begin{solution}
+    \begin{align*}
+        \tr(\boldsymbol{A}) &= 7 \\
+        \det(\boldsymbol{A}) &= 10 \\
+        \lambda^2 - \tr(\boldsymbol{A})\lambda + \det(\boldsymbol{A}) &= 0 \\
+        \lambda^2 - 7\lambda + 10 &= 0 \\
+        (\lambda - 5)(\lambda - 2) &= 0 \\
+        \lambda_1 &= 2 \\
+        \lambda_2 &= 5 \\
+        \\
+        \boldsymbol{Av} &= \lambda\boldsymbol{v} \\
+        \boldsymbol{Av}_1 &= \lambda_1\boldsymbol{v}_1 \\
+        \begin{bmatrix}
+            2 & 2 \\
+            1 & 1
+        \end{bmatrix}\boldsymbol{v}_1 &= \begin{bmatrix}
+            0 \\ 0
+        \end{bmatrix} \\
+        \boldsymbol{v}_1 &= \begin{bmatrix}
+            1 \\ -1
+        \end{bmatrix} \\
+        \begin{bmatrix}
+            -1 & 2 \\
+            1 & -2
+        \end{bmatrix}\boldsymbol{v}_2 &= \begin{bmatrix}
+            0 \\ 0
+        \end{bmatrix} \\
+        \boldsymbol{v}_2 &= \begin{bmatrix}
+            2 \\ 1
+        \end{bmatrix}
+    \end{align*}
+\end{solution}

@@ -1,0 +1,21 @@
+On the same axes, plot the eigenvectors scaled by the square-root of their corresponding eigenvalues.
+
+\begin{solution} \
+    \begin{lstlisting}[language=Matlab]
+clf
+hold on
+grid on
+v_adj = v.*sqrt(diag(lambda));
+quiver3(0, 0, 0, v_adj(1, 1), v_adj(2, 1), v_adj(3, 1), 'LineWidth', 2)
+quiver3(0, 0, 0, v_adj(1, 2), v_adj(2, 2), v_adj(3, 2), 'LineWidth', 2)
+quiver3(0, 0, 0, v_adj(1, 3), v_adj(2, 3), v_adj(3, 3), 'LineWidth', 2)
+plot3(b_adj, s_adj, w_adj, 'b.', 'MarkerSize', 0.1);
+xlabel('B')
+ylabel('S')
+zlabel('W')
+    \end{lstlisting}
+    
+    \begin{center}
+        \includegraphics[width=.7\textwidth]{img/e10p4.png}
+    \end{center}
+\end{solution}

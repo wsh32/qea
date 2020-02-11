@@ -1,0 +1,22 @@
+Construct a covariance matrix for the data and compute its eigenvectors.
+
+\begin{solution} \
+    \begin{lstlisting}[language=Matlab]
+A = 1/sqrt(length(b)-1) * [b_adj s_adj w_adj];
+C = A' * A;
+[v, lambda] = eigs(C)
+    \end{lstlisting}
+    
+    \begin{align*}
+        \boldsymbol{v} = \begin{bmatrix}
+            0.6994 & 0.1233 & -0.7041 \\
+           -0.1516 & 0.9882 &  0.0225 \\
+            0.6985 & 0.0910 &  0.7098
+        \end{bmatrix} \\
+        \boldsymbol{\lambda} = \begin{bmatrix}
+            566.3086 & 0 & 0 \\
+            0 & 27.0811 & 0 \\
+            0 & 0 & 15.1269
+        \end{bmatrix}
+    \end{align*}
+\end{solution}

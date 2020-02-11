@@ -1,0 +1,16 @@
+Use the solutions of the characteristic equation to prove that the eigenvalues of a symmetric $2 \times 2$ matrix are real.
+
+\begin{solution}
+    \begin{align*}
+        \boldsymbol{A} &= \begin{bmatrix}
+            a & b \\
+            b & c
+        \end{bmatrix} \\
+        \lambda^2 - \tr\left(\boldsymbol{A}\right)\lambda + \det\left(\boldsymbol{A}\right) &= 0 \\
+        \frac{\tr(\boldsymbol{A}) \pm \sqrt{\tr(\boldsymbol{A})^2 - 4\det(\boldsymbol{A})}}{2} &= \lambda \\
+        \tr(\boldsymbol{A})^2 - 4\det(\boldsymbol{A}) &\geq 0 \\
+        (a+c)^2 - 4(ac-b^2) &\geq 0 \\
+        a^2 + 2ac + c^2 - 4ac + 4b^2 &\geq 0 \\
+        (a-c)^2 + 4b^2 &\geq 0
+    \end{align*}
+\end{solution}

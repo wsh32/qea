@@ -1,0 +1,14 @@
+Make a 3D scatter plot of the data points with the means subtracted out. You will find MATLAB’s \texttt{plot3} function useful. You may wish to use the \texttt{MarkerSize} argument for \texttt{plot3} with a marker size of 0.1 or less to make the plots clearer.
+
+\begin{solution} \
+    \begin{lstlisting}[language=Matlab]
+plot3(b_adj, s_adj, w_adj, '.', 'MarkerSize', 0.1);
+xlabel('B')
+ylabel('S')
+zlabel('W')
+    \end{lstlisting}
+    
+    \begin{center}
+        \includegraphics[width=.6\textwidth]{img/e10p2.png}
+    \end{center}
+\end{solution}

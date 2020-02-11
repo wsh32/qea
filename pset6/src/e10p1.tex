@@ -1,0 +1,10 @@
+Subtract out the mean temperature of each city from the daily temperature data.
+
+\begin{solution} \
+    \begin{lstlisting}[language=Matlab]
+load('temps_bos_sp_dc.mat')
+b_adj = b - mean(b);
+s_adj = s - mean(s);
+w_adj = w - mean(w);
+    \end{lstlisting}
+\end{solution}

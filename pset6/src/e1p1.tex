@@ -1,0 +1,22 @@
+\begin{align*}
+    \boldsymbol{A} = \begin{bmatrix}
+        2 & 0 \\
+        0 & -3
+    \end{bmatrix}
+\end{align*}
+
+Confirm the eigenvalues of $\boldsymbol{A}$ are $\lambda_1 = 2$ and $\lambda_2 = -3$.
+
+\begin{solution}
+    \begin{align*}
+        \boldsymbol{Av} &= \lambda \boldsymbol{v} \\
+        \left(\boldsymbol{A} - \lambda\boldsymbol{I}\right)\boldsymbol{v} &= 0 \\
+        \boldsymbol{A} - \lambda\boldsymbol{I} &= \begin{bmatrix}
+            2 - \lambda & 0 \\
+            0 & -3 - \lambda
+        \end{bmatrix} \\
+        \det\left(\boldsymbol{A} - \lambda\boldsymbol{I}\right) &= 0 \\
+        \left(2 - \lambda\right) \left(-3 - \lambda\right) &= 0 \\
+        \lambda &= 2, -3
+    \end{align*}
+\end{solution}

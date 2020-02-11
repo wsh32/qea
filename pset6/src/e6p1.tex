@@ -1,0 +1,30 @@
+Findn the eigenvector for $\boldsymbol{A} = \begin{bmatrix}18 & -2 \\ 12 & 7\end{bmatrix}$ that corresponds with $\lambda_2 = 15$.
+
+\begin{solution}
+    \begin{align*}
+        \boldsymbol{Av}_2 &= \lambda\boldsymbol{v}_2 \\
+        \begin{bmatrix}
+            18 & -2 \\
+            12 & 7
+        \end{bmatrix}\boldsymbol{v}_2 &= 15\boldsymbol{v}_2 \\
+        \begin{bmatrix}
+            18-15 & -2 \\
+            12 & 7-15
+        \end{bmatrix}\boldsymbol{v}_2 &= \begin{bmatrix}
+            0 \\ 0
+        \end{bmatrix} \\
+        \begin{bmatrix}
+            3 & -2 \\
+            12 & -8
+        \end{bmatrix}\begin{bmatrix}
+            a \\ b
+        \end{bmatrix} &= \begin{bmatrix}
+            0 \\ 0
+        \end{bmatrix} \\
+        3a - 2b &= 0 \\
+        12a - 8b &= 0 \\
+        \boldsymbol{v}_2 &= \begin{bmatrix}
+            2 \\ 3
+        \end{bmatrix}
+    \end{align*}
+\end{solution}
