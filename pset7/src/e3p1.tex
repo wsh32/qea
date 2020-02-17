@@ -1,0 +1,18 @@
+Create a covariance matrix R using the 10 years worth of temperature data from Boston, Washington DC and Sao Paolo.
+
+\begin{solution} \
+    \begin{lstlisting}[language=Matlab]
+load('data/avg_temperatures_pt2.mat')
+
+A = (1/sqrt(17304)) * [(b_tr-mean(b_tr))/std(b_tr); (w_tr-mean(w_tr))/std(w_tr) (s_tr-mean(s_tr))/std(s_tr)]
+R = A' * A
+    \end{lstlisting}
+    
+    \begin{align*}
+        \boldsymbol{R} = \begin{bmatrix}
+            0.4221 &  0.3999 & -0.2286 \\
+            0.3999 &  0.4221 & -0.2291 \\
+           -0.2286 & -0.2291 &  0.4221
+        \end{bmatrix}
+    \end{align*}
+\end{solution}

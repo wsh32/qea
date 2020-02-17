@@ -1,0 +1,7 @@
+You can now check how well your compression worked, by using the values of $\alpha_{1i}$ and $\alpha_{2i}$ to reconstruct 365 different $3 \times 1$ vectors each representing the temperatures for the three cities over the 365 days. Let $\hat{\boldsymbol{t}}_i$ represent the reconstructed temperature vector on the i-th day. Using what you know about projections onto orthonormal vectors, reconstruct $\boldsymbol{t}_i$ using $\alpha_{1i}$, $\alpha_{2i}$, $v_1$ and $v_2$. Repeat this for all 365 days.
+
+\begin{solution} \
+    \begin{lstlisting}
+t_hat = V_p * alpha
+    \end{lstlisting}
+\end{solution}

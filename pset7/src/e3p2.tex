@@ -1,0 +1,16 @@
+Perform an eigendecomposition of the matrix $\boldsymbol{R}$, and make a new matrix $\boldsymbol{V}_p$ which has the 2 eigenvectors corresponding to the 2 largest eigenvalues of $\boldsymbol{R}$.
+
+\begin{solution} \
+    \begin{lstlisting}[language=Matlab]
+[v, lambda] = eig(R);
+V_p = [v(:, 3) v(:,2)]
+    \end{lstlisting}
+    
+    \begin{align*}
+        \boldsymbol{V}_p = \begin{bmatrix}
+            0.5786 &  0.4995 \\
+            0.5723 & -0.8119 \\
+            0.5811 &  0.3022
+        \end{bmatrix}
+    \end{align*}
+\end{solution}

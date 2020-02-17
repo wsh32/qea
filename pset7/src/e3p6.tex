@@ -1,0 +1,10 @@
+On the same axes, plot the original and reconstructed temperature for Boston. Repeat this for Washington DC and Sao Paolo. Observe how close the reconstructions are, for the different data sets.
+
+\begin{solution} \
+    \begin{lstlisting}[language=Matlab]
+hold on
+plot3(T(1,:), T(2,:), T(3,:), 'b.')
+plot3(t_hat(1,:), t_hat(2,:), t_hat(3,:), 'r.')
+grid on
+    \end{lstlisting}
+\end{solution}

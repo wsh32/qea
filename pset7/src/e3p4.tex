@@ -1,0 +1,12 @@
+Take the dot product of each column of the matrix $\boldsymbol{T}$ with the two eigenvectors in matrix $V_p$.
+
+\begin{align*}
+    \alpha_{1i} &= \boldsymbol{v}_1^\intercal\boldsymbol{t}_i \\
+    \alpha_{1i} &= \boldsymbol{v}_2^\intercal\boldsymbol{t}_i
+\end{align*}
+
+\begin{solution} \
+    \begin{lstlisting}[language=Matlab]
+alpha = V_p' * T
+    \end{lstlisting}
+\end{solution}

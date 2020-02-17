@@ -1,0 +1,7 @@
+Create centered versions of the new temperature data vectors, and create a $3 \times 365$ matrix $\boldsymbol{T}$ which has the centered temperatures of Boston, Washington DC, and Sao Paolo as its rows.
+
+\begin{solution} \
+    \begin{lstlisting}[language=Matlab]
+T = [(b_new-mean(b_new))/std(b_new) (w_new-mean(w_new))/std(w_new) (s_new-mean(s_new))/std(s_new)]'
+    \end{lstlisting}
+\end{solution}
