@@ -18,6 +18,7 @@ class PCA():
 		self.Sigma = None # Standard deviations (square root of the eigenvalues)
 	def find_covariance(self):
 		# Finds the covariance matrix of the supplied vectors
+		print("Finding covariance matrix ...")
 		self.means = np.mean(self.vectors, axis=1)
 		horiz = self.vectors.transpose() # Transpose to row vectors
 		horiz -= self.means # Make sure this does the expected
@@ -25,7 +26,9 @@ class PCA():
 		self.R = np.matmul(horiz.transpose(), horiz)
 		self.R /= np.sqrt(self.vectors.shape[1] - 1)
 		assert self.R.shape == (self.ndim, self.ndim)
+		printf("Done.")
 	def find_eigens(self):
+		print("Finding eigenvectors ...")
 		if np.all(self.R == None):
 			self.find_covariance()
 		# Finds the eigenvectors of the covariance matrix
@@ -35,6 +38,7 @@ class PCA():
 		self.D = self.D[idx]
 		self.V = self.V[:,idx]
 		self.Sigma = np.sqrt(self.D)
+		print("Done.")
 	def print_eigen(self, idx):
 		# Prints a prettified version of the idxth eigenvector and its value
 		if idx >= self.ndim:
