@@ -47,8 +47,10 @@ class PCA():
 		for i in range(self.ndim):
 			print((self.labels[i].rjust(15, ' ') if self.labels else str(i).rjust(15, ' ')), " :: ", self.V[i, idx])
 		print("---")
-	def print_eigens(self, num):
+	def print_eigens(self, num=None):
 		# Prints the top num eigenvectors and their values
+		if not num:
+			num = self.ndim
 		if num > self.ndim:
 			raise ValueError("too many eigenvectors requested")
 		if np.all(self.V == None):
