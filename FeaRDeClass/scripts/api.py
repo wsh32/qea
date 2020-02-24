@@ -13,14 +13,13 @@ class BaseballData:
         self.startyear = startyear
         self.endyear = endyear
 
-        player_data_raw = pd.read_csv(player_data_csv)
         appearance_data_raw = pd.read_csv(appearance_data_csv)
         pitching_data_raw = pd.read_csv(pitching_data_csv)
         batting_data_raw = pd.read_csv(batting_data_csv)
         fielding_data_raw = pd.read_csv(fielding_data_csv)
         salary_data_raw = pd.read_csv(salary_data_csv)
 
-        self.player_data = self._limit_years(player_data_raw, startyear, endyear)
+        self.player_data = pd.read_csv(player_data_csv)
         self.appearance_data = self._limit_years(appearance_data_raw, player_data_raw, startyear, endyear)
         self.pitching_data = self._limit_years(pitching_data_raw, startyear, endyear)
         self.batting_data = self._limit_years(batting_data_raw, startyear, endyear)
