@@ -8,13 +8,27 @@ class BaseballData:
                  pitching_data_csv='data/Pitching.csv',
                  batting_data_csv='data/Batting.csv',
                  fielding_data_csv='data/Fielding.csv',
-                 salary_data_csv='data/Salaries.csv'):
-        self.player_data = pd.read_csv(player_data_csv)
-        self.appearance_data = pd.read_csv(appearance_data_csv)
-        self.pitching_data = pd.read_csv(pitching_data_csv)
-        self.batting_data = pd.read_csv(batting_data_csv)
-        self.fielding_data = pd.read_csv(fielding_data_csv)
-        self.salary_data = pd.read_csv(salary_data_csv)
+                 salary_data_csv='data/Salaries.csv',
+                 startyear=2018, endyear=2019):
+        self.startyear = startyear
+        self.endyear = endyear
+
+        player_data_raw = pd.read_csv(player_data_csv)
+        appearance_data_raw = pd.read_csv(appearance_data_csv)
+        pitching_data_raw = pd.read_csv(pitching_data_csv)
+        batting_data_raw = pd.read_csv(batting_data_csv)
+        fielding_data_raw = pd.read_csv(fielding_data_csv)
+        salary_data_raw = pd.read_csv(salary_data_csv)
+
+        self.player_data = self._limit_years(player_data_raw, startyear, endyear)
+        self.appearance_data = self._limit_years(appearance_data_raw, player_data_raw, startyear, endyear)
+        self.pitching_data = self._limit_years(pitching_data_raw, startyear, endyear)
+        self.batting_data = self._limit_years(batting_data_raw, startyear, endyear)
+        self.fielding_data = self._limit_years(fielding_data_raw, startyear, endyear)
+        self.salary_data = self._limit_years(salary_data_raw, startyear, endyear)
+
+    def _limit_years(self, df, startyear, endyear, index='yearID'):
+        return df.loc[(df[index] >= startyear) & (df[index] <= endyear)]
 
     def _get_data(self, df, index, value):
         try:
@@ -22,7 +36,7 @@ class BaseballData:
         except TypeError:
             return df.loc[df[index] == value]
 
-    def players(self, startyear=2018, endyear=2019, min_games=10):
+    def players(self, startyear=self.startyear, endyear=self.endyear, min_games=10):
         return self.appearance_data.loc[(self.appearance_data['yearID'] >= startyear) & (self.appearance_data['yearID'] <= 2019) & (self.appearance_data['G_all'] > min_games)]['playerID']
 
     def get_playerid(self, last_name, first_name=None):
