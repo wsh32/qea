@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 
 class BaseballData:
@@ -6,30 +7,50 @@ class BaseballData:
                  appearance_data_csv='data/Appearances.csv',
                  pitching_data_csv='data/Pitching.csv',
                  batting_data_csv='data/Batting.csv',
+                 fielding_data_csv='data/Fielding.csv',
                  salary_data_csv='data/Salaries.csv'):
         self.player_data = pd.read_csv(player_data_csv)
         self.appearance_data = pd.read_csv(appearance_data_csv)
         self.pitching_data = pd.read_csv(pitching_data_csv)
         self.batting_data = pd.read_csv(batting_data_csv)
+        self.fielding_data = pd.read_csv(fielding_data_csv)
         self.salary_data = pd.read_csv(salary_data_csv)
 
-    def get_playerid(last_name, first_name=None):
+    def _get_data(self, df, index, value):
+        try:
+            return df.loc[df[index].isin(value)]
+        except TypeError:
+            return df.loc[df[index] == value]
+
+    def players(self, startyear=2000, endyear=2019, min_games=10):
+        return self.appearance_data.loc[(self.appearance_data['yearID'] >= startyear) & (self.appearance_data['yearID'] <= 2019) & (self.appearance_data['G_all'] > min_games)]['playerID']
+
+    def get_playerid(self, last_name, first_name=None):
         if first_name:
-            playerid = player_data.loc[(player_data['nameLast'] == last_name) &
-                                       (player_data['nameFirst'] == first_name)]['playerID']
+            playerid = self.player_data.loc[(self.player_data['nameLast'] == last_name) & (self.player_data['nameFirst'] == first_name)]['playerID']
         else:
-            playerid = player_data.loc[(player_data['nameLast'] == last_name)]['playerID']
+            playerid = self.player_data.loc[(self.player_data['nameLast'] == last_name)]['playerID']
         return playerid
 
-    def is_pitcher(playerid):
-        pass
+    def get_player_name(self, playerid):
+        data = self._get_data(self.player_data, 'playerID', playerid)
+        return f"{data['nameFirst'].values[0]} {data['nameLast'].values[0]}"
 
-    def get_player_pitching(playerid):
-        pass
+    def is_pitcher(self, playerid):
+        player_fielding_data = self._get_data(self.fielding_data, 'playerID', playerid)
+        return (player_fielding_data['POS'] == 'P').values[0]
 
-    def get_player_batting(playerid):
-        pass
+    def get_player_pitching(self, playerid):
+        if not self.is_pitcher(playerid):
+            return None
+        return self._get_data(self.pitching_data, 'playerID', playerid)
 
-    def get_player_fielding(playerid):
-        pass
+    def get_player_batting(self, playerid):
+        return self._get_data(self.batting_data, 'playerID', playerid)
+
+    def get_player_fielding(self, playerid):
+        return self._get_data(self.fielding_data, 'playerID', playerid)
+
+    def get_salaries(self, playerid):
+        return self._get_data(self.salary_data, 'playerID', playerid)
 
