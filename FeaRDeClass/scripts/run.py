@@ -49,21 +49,15 @@ def main():
 	print("Cleaning data ...")
 	# Replace nans in the dataset with the column mean
 
-	pitcher_means = np.nanmean(pitcher_stats.astype(np.float64), axis=0)
-	nopitch_means = np.nanmean(nopitch_stats.astype(np.float64), axis=0)
+	pitcher_stats = pitcher_stats.astype(np.float64)
+	nopitch_stats = nopitch_stats.astype(np.float64)
 
-	pitcher_means = np.where(np.isnan(pitcher_means), np.ma.array(pitcher_means, 
-		mask = np.isnan(pitcher_means)).mean(axis = 0), pitcher_means) 
-	nopitch_means = np.where(np.isnan(nopitch_means), np.ma.array(nopitch_means, 
-		mask = np.isnan(nopitch_means)).mean(axis = 0), nopitch_means)    
+	pitcher_stats = np.where(np.isnan(pitcher_stats), np.ma.array(pitcher_stats, 
+		mask = np.isnan(pitcher_stats)).mean(axis = 0), pitcher_stats) 
+	nopitch_stats = np.where(np.isnan(nopitch_stats), np.ma.array(nopitch_stats, 
+		mask = np.isnan(nopitch_stats)).mean(axis = 0), nopitch_stats)    
 
-	print("Nans? ", np.any(np.isnan(pitcher_means)))
-
-	#idx = np.where(np.isnan(pitcher_means))
-	#pitcher_stats[idx] = np.take(pitcher_means, idx[0])
-
-	#idx = np.where(np.isnan(nopitch_means))
-	#nopitch_stats[idx] = np.take(nopitch_means, idx[0])
+	print("Nans? ", np.any(np.isnan(pitcher_stats)))
 
 	print("Done.")
 

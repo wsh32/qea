@@ -7,9 +7,7 @@ class PCA():
 			assert len(vectors.shape) == 2
 		except AttributeError:
 			raise AttributeError("vectors must be a 2D numpy array")
-		print("Nan input? ", np.any(np.isnan(vectors)))
 		self.vectors = np.array(vectors, dtype=np.float64)
-		print("Nan input after? ", np.any(np.isnan(self.vectors)))
 		self.labels = labels # Optional labels for each dimension
 		self.ndim = vectors.shape[0] # Number of dimensions in the data
 		self.means = None # Means (by dimension)
