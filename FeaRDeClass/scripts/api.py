@@ -36,7 +36,11 @@ class BaseballData:
         except TypeError:
             return df.loc[df[index] == value]
 
-    def players(self, startyear=self.startyear, endyear=self.endyear, min_games=10):
+    def players(self, startyear=None, endyear=None, min_games=10):
+        if startyear is None:
+            startyear = self.startyear
+        if endyear is None:
+            endyear = self.endyear
         return self.appearance_data.loc[(self.appearance_data['yearID'] >= startyear) & (self.appearance_data['yearID'] <= 2019) & (self.appearance_data['G_all'] > min_games)]['playerID']
 
     def get_playerid(self, last_name, first_name=None):
