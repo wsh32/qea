@@ -26,7 +26,6 @@ class PCA():
 		self.R = np.matmul(horiz.transpose(), horiz)
 		self.R /= np.sqrt(self.vectors.shape[1] - 1)
 		assert self.R.shape == (self.ndim, self.ndim)
-		print(self.R)
 		print("Done.")
 	def find_eigens(self):
 		print("Finding eigenvectors ...")
