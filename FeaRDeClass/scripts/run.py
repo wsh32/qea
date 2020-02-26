@@ -2,8 +2,11 @@ from pca import PCA
 from api import BaseballData
 import numpy as np
 import sys
+import random
 
-def main():
+random.seed(57)
+
+def get_pca():
 	print("Importing player data ...")
 	data_api = BaseballData()
 	player_ids = data_api.players().tolist()
@@ -15,35 +18,44 @@ def main():
 	stat_names_fld = data_api.get_player_fielding(player_ids[0]).columns[6:].tolist()
 
 	# build seperate arrays for pitchers and non-pitchers.
-	pit_stats = np.array([[]])
-	bat_stats = np.array([[]])
-	fld_stats = np.array([[]])
+	#pit_stats = np.array([[]])
+	pit_stats = np.empty((0, len(stat_names_pit)))
+	bat_stats = np.empty((0, len(stat_names_bat)))
+	fld_stats = np.empty((0, len(stat_names_fld)))
+
+	pit_tests = np.empty((0, len(stat_names_pit)))
+	bat_tests = np.empty((0, len(stat_names_bat)))
+	fld_tests = np.empty((0, len(stat_names_fld)))
 
 	print("Filling out statistic arrays (", len(player_ids), " ids)...")
 	for pidx in range(len(player_ids)):
 		pid = player_ids[pidx]
 		print(pidx)
 		temp = data_api.get_player_pitching(pid)
-		if temp is not None:
-			pit = temp.to_numpy()[:, 5:]
-			# The first time a value is added the array is of the wrong shape for appending
-			if pit_stats.shape[1] == 0:
-				pit_stats = np.array(pit)
-			else:
+		if random.choices((True, False), weights=(0.95, 0.05)):
+			# Add to the train set
+			if temp is not None:
+				pit = temp.to_numpy()[:, 5:]
 				pit_stats = np.append(pit_stats, pit, axis=0)
-		# Collate batting data
-		bat = data_api.get_player_batting(pid).to_numpy()[:, 5:]
-		if bat_stats.shape[1] == 0:
-			bat_stats = np.array(bat)
-		else:
+			# Collate batting data
+			bat = data_api.get_player_batting(pid).to_numpy()[:, 5:]
 			bat_stats = np.append(bat_stats, bat, axis=0)
-		# Collate fielding data
-		fld = data_api.get_player_fielding(pid).to_numpy()[:, 6:]
-		if fld_stats.shape[1] == 0:
-			fld_stats = np.array(fld)
-		else:
+			# Collate fielding data
+			fld = data_api.get_player_fielding(pid).to_numpy()[:, 6:]
 			fld_stats = np.append(fld_stats, fld, axis=0)
-		sys.stdout.write("\033[F")
+			sys.stdout.write("\033[F")
+		else:
+			# Add to the test set
+			if temp is not None:
+				pit = temp.to_numpy()[:, 5:]
+				pit_tests = np.append(pit_tests, pit, axis=0)
+			# Collate batting data
+			bat = data_api.get_player_batting(pid).to_numpy()[:, 5:]
+			bat_tests = np.append(bat_tests, bat, axis=0)
+			# Collate fielding data
+			fld = data_api.get_player_fielding(pid).to_numpy()[:, 6:]
+			fld_tests = np.append(fld_tests, fld, axis=0)
+			sys.stdout.write("\033[F")
 	print("Done.")
 
 	print("Cleaning data ...")
@@ -61,6 +73,7 @@ def main():
 		mask = np.isnan(fld_stats)).mean(axis = 0), fld_stats)
 
 	print("Nans? ", np.any(np.isnan(pit_stats)))
+	print("Infs? ", np.any(np.isinf(pit_stats)))
 
 	print("Done.")
 
@@ -68,6 +81,7 @@ def main():
 	print("Running PCA ...")
 	#pit_anls = PCA(np.transpose(pitcher_stats), labels=(stat_names_pit + stat_names_bat + stat_names_fld))
 	#nop_anls = PCA(np.transpose(nopitch_stats), labels=(stat_names_bat + stat_names_fld))
+	print(pit_stats)
 	pit_anls = PCA(np.transpose(pit_stats), labels=stat_names_pit)
 	bat_anls = PCA(np.transpose(bat_stats), labels=stat_names_bat)
 	fld_anls = PCA(np.transpose(fld_stats), labels=stat_names_fld)
@@ -77,14 +91,12 @@ def main():
 	fld_anls.find_eigens()
 	print("Done.")
 
-	print("Pitcher principle components:")
-	pit_anls.print_eigens()
+	return (pit_anls, bat_anls, fld_anls, pit_tests, bat_tests, fld_tests)
 
-	print("Batter principle components:")
-	bat_anls.print_eigens()
+def main():
+	pa, ba, fa, pt, bt, ft = get_pca()
 
-	print("Fielder principle components:")
-	fld_anls.print_eigens()
+	pa.print_eigens()
 
 if __name__ == '__main__':
 	main()
