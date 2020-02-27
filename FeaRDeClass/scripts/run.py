@@ -9,13 +9,15 @@ def project_vecs(anls, vecs, eig_count):
 	assert eig_count <= anls.ndim
 	eigs = anls.V[:, :eig_count]
 
-	print("Selected eigenvectors shape", eigs.shape)
-	print("Shape of vectors to be projected", vecs.shape)
+	#print("Selected eigenvectors shape", eigs.shape)
+	#print("Shape of vectors to be projected", vecs.shape)
 
 	return np.matmul(eigs.transpose(), vecs)
 
 def get_rms(data_api, eig_count, anls, tests, ids, ids_tests):
 	# run the classifier on the supplied data and return rms salary error
+	close_count = 5 #number of closest players of which to average salaries
+	close_sals = np.zeros(shape=(5,))
 
 	player_space = project_vecs(anls, anls.vectors, eig_count)
 	tests_projected = project_vecs(anls, tests, eig_count)
@@ -28,13 +30,18 @@ def get_rms(data_api, eig_count, anls, tests, ids, ids_tests):
 		diffs = player_space - tests_projected[:, i].reshape((eig_count, 1))
 		dists = np.linalg.norm(diffs, axis=0) # distance to each column vector in player_space
 
-		least = np.argsort(dists)[0] # index of closest vector in face space
-		least_id = ids[least]
+		least = np.argsort(dists)[0:close_count] # index of closest vector in face space
 
-		l_salary = data_api.get_mean_salary(least_id)
+		# average the salaries of the nearest 5 points in player space
+		for j in range(close_count):
+			least_id = ids[least[j]]
+			close_sals[j] = data_api.get_mean_salary(least_id)
+			close_sals[j] = np.nan if close_sals[j] == 0 else close_sals[j]
+
+		l_salary = np.nanmean(close_sals)
 		salary = data_api.get_mean_salary(ids_tests[i])
 
-		if (l_salary == 0) or (salary == 0):
+		if (l_salary == 0) or (l_salary == np.nan) or (salary == 0):
 			# salary data is missing for one or more of the relevant players
 			#print("Salary error! least_id", least_id, "ids_tests[i]", ids_tests[i], "l_salary", l_salary, "salary", salary)
 			missing += 1
@@ -46,6 +53,8 @@ def get_rms(data_api, eig_count, anls, tests, ids, ids_tests):
 
 def get_pca(data_api):
 	player_ids = data_api.players().tolist()
+	entry_count = len(player_ids)
+	player_ids = list(set(player_ids))
 
 	# get the column names for the three categories of statistics
 	stat_names_pit = data_api.get_player_pitching('salech01').columns[5:].tolist() # hardcoded :(
@@ -54,9 +63,9 @@ def get_pca(data_api):
 
 	# build seperate arrays for pitchers and non-pitchers.
 	#pit_stats = np.array([[]])
-	pit_stats = np.empty((0, len(stat_names_pit)))
-	bat_stats = np.empty((0, len(stat_names_bat)))
-	fld_stats = np.empty((0, len(stat_names_fld)))
+	pit_stats = np.empty((entry_count, len(stat_names_pit)))
+	bat_stats = np.empty((2 * entry_count, len(stat_names_bat)))
+	fld_stats = np.empty((3 * entry_count, len(stat_names_fld)))
 
 	pit_tests = np.empty((0, len(stat_names_pit)))
 	bat_tests = np.empty((0, len(stat_names_bat)))
@@ -70,24 +79,40 @@ def get_pca(data_api):
 	ids_bat_tests = []
 	ids_fld_tests = []
 
+	pstat_idx = 0
+	bstat_idx = 0
+	fstat_idx = 0
+
 	print("Filling out statistic arrays (", len(player_ids), " ids)...")
 	for pidx in range(len(player_ids)):
 		pid = player_ids[pidx]
 		print(pidx)
 		temp = data_api.get_player_pitching(pid)
-		if (random.random() < 0.95):
+		if (random.random() < 0.99):
 			# Add to the train set
 			if temp is not None:
 				pit = temp.to_numpy()[:, 5:]
-				pit_stats = np.append(pit_stats, pit, axis=0)
-				ids_pit += [pid] * pit.shape[0]
+				ln = pit.shape[0]
+				if ln:
+					pit_stats[pstat_idx : pstat_idx + ln, :] = pit
+					pstat_idx += ln
+				#pit_stats = np.append(pit_stats, pit, axis=0)
+				ids_pit += [pid] * ln
 			# Collate batting data
 			bat = data_api.get_player_batting(pid).to_numpy()[:, 5:]
-			bat_stats = np.append(bat_stats, bat, axis=0)
-			ids_bat += [pid] * bat.shape[0]
+			ln = bat.shape[0]
+			if ln:
+				bat_stats[bstat_idx : bstat_idx + ln, :] = bat
+				bstat_idx += ln
+			#bat_stats = np.append(bat_stats, bat, axis=0)
+			ids_bat += [pid] * ln
 			# Collate fielding data
 			fld = data_api.get_player_fielding(pid).to_numpy()[:, 6:]
-			fld_stats = np.append(fld_stats, fld, axis=0)
+			ln = fld.shape[0]
+			if ln:
+				fld_stats[fstat_idx : fstat_idx + ln, :] = fld
+				fstat_idx += ln
+			#fld_stats = np.append(fld_stats, fld, axis=0)
 			ids_fld += [pid] * fld.shape[0]
 		else:
 			# Add to the test set
@@ -105,6 +130,10 @@ def get_pca(data_api):
 			ids_fld_tests += [pid] * fld.shape[0]
 		sys.stdout.write("\033[F")
 	print("Done.")
+
+	pit_stats = pit_stats[:pstat_idx, :]
+	bat_stats = bat_stats[:bstat_idx, :]
+	fld_stats = fld_stats[:fstat_idx, :]
 
 	print("Cleaning data ...")
 	# Replace nans in the dataset with the column mean
@@ -163,7 +192,7 @@ def get_pca(data_api):
 
 def main():
 	print("Importing player data ...")
-	data_api = BaseballData()
+	data_api = BaseballData(startyear=2000, endyear=2016)
 	print("Done.")
 
 	po, bo, fo = get_pca(data_api)
