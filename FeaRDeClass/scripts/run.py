@@ -4,6 +4,7 @@ import numpy as np
 import sys
 import random
 import matplotlib.pyplot as plt
+from scipy.stats import zscore
 
 random.seed(47)
 
@@ -25,9 +26,11 @@ def generate_plot(data_api, title, anls, tests, ids, ids_tests):
     for pid in ids:
         salaries.append(data_api.get_mean_salary(pid))
 
+    salaries = np.log10(salaries)
+
     cm = plt.cm.get_cmap('RdYlBu')
     sc = plt.scatter(player_space[0, :], player_space[1, :], c=salaries, s=2, cmap=cm)
-    plt.colorbar(sc, label="Player Salary ($)")
+    plt.colorbar(sc, label="Log10(Player Salary ($))")
     plt.title("Player Salary by " + title + " Performance Features")
     plt.xlabel("Principal Component #1")
     plt.ylabel("Principal Component #2")
@@ -118,10 +121,10 @@ def get_pca(data_api):
                 #pit_stats = np.append(pit_stats, pit, axis=0)
                 ids_pit += [pid] * ln
             # Collate batting data
-            bat = data_api.get_player_batting(pid)  # .to_numpy()[:, 5:]
+            bat = data_api.get_player_batting(pid).to_numpy()[:, 5:]
             ln = bat.shape[0]
             if ln:
-                                bat_stats[bstat_idx : bstat_idx + ln, :] = bat.to_numpy()[:, 5:]
+                bat_stats[bstat_idx : bstat_idx + ln, :] = bat
                 bstat_idx += ln
             #bat_stats = np.append(bat_stats, bat, axis=0)
             ids_bat += [pid] * ln
@@ -129,7 +132,7 @@ def get_pca(data_api):
             fld = data_api.get_player_fielding(pid).to_numpy()[:, 6:]
             ln = fld.shape[0]
             if ln:
-                                fld_stats[fstat_idx : fstat_idx + ln, :] = fld.to_numpy()[:, 6:]
+                fld_stats[fstat_idx : fstat_idx + ln, :] = fld
                 fstat_idx += ln
             #fld_stats = np.append(fld_stats, fld, axis=0)
             ids_fld += [pid] * fld.shape[0]
@@ -184,6 +187,15 @@ def get_pca(data_api):
     pit_tests = pit_tests.transpose()
     bat_tests = bat_tests.transpose()
     fld_tests = fld_tests.transpose()
+
+    # normalize all vectors
+    pit_stats = zscore(pit_stats, axis=1)
+    bat_stats = zscore(bat_stats, axis=1)
+    fld_stats = zscore(fld_stats, axis=1)
+
+    pit_tests = zscore(pit_tests, axis=1)
+    bat_tests = zscore(bat_tests, axis=1)
+    fld_tests = zscore(fld_tests, axis=1)
 
     print("Nans? ", np.any(np.isnan(pit_stats)))
     print("Infs? ", np.any(np.isinf(pit_stats)))

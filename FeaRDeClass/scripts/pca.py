@@ -1,4 +1,5 @@
 import numpy as np
+from scipy import stats
 
 class PCA():
 	def __init__(self, vectors, labels=None):
@@ -21,7 +22,7 @@ class PCA():
 		print("Finding covariance matrix ...")
 		self.means = np.mean(self.vectors, axis=1)
 		horiz = self.vectors.transpose() # Transpose to row vectors
-		horiz -= self.means # Make sure this does the expected
+		horiz -= self.means
 
 		self.R = np.matmul(horiz.transpose(), horiz)
 		self.R /= np.sqrt(self.vectors.shape[1] - 1)
