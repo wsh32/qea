@@ -76,5 +76,9 @@ class BaseballData:
         return self._get_data(self.salary_data, 'playerID', playerid)
 
     def get_mean_salary(self, playerid):
-        return np.average(self.get_salaries(playerid).salary.values)
+        mean_salary = p.average(self.get_salaries(playerid).salary.values)
+        if np.isnan(mean_salary):
+            return 0
+        else:
+            return mean_salary
 
