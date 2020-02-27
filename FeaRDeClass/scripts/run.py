@@ -22,6 +22,8 @@ def get_rms(data_api, eig_count, anls, tests, ids, ids_tests):
 
 	sse = 0 # sum of squared errors
 
+	missing = 0
+
 	for i in range(tests.shape[1]):
 		diffs = player_space - tests_projected[:, i].reshape((eig_count, 1))
 		dists = np.linalg.norm(diffs, axis=0) # distance to each column vector in player_space
@@ -31,11 +33,15 @@ def get_rms(data_api, eig_count, anls, tests, ids, ids_tests):
 
 		l_salary = data_api.get_mean_salary(least_id)
 		salary = data_api.get_mean_salary(ids_tests[i])
-		#print("least_id", least_id, "ids_tests[i]", ids_tests[i])
 
-		sse += (l_salary - salary) ** 2
+		if (l_salary == 0) or (salary == 0):
+			# salary data is missing for one or more of the relevant players
+			#print("Salary error! least_id", least_id, "ids_tests[i]", ids_tests[i], "l_salary", l_salary, "salary", salary)
+			missing += 1
+		else:
+			sse += (l_salary - salary) ** 2
 
-	return (sse/tests.shape[1]) ** 0.5
+	return (sse/(tests.shape[1] - missing)) ** 0.5
 
 
 def get_pca(data_api):
