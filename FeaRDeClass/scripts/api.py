@@ -40,7 +40,8 @@ class BaseballData:
             startyear = self.startyear
         if endyear is None:
             endyear = self.endyear
-        return self.appearance_data.loc[(self.appearance_data['yearID'] >= startyear) & (self.appearance_data['yearID'] <= endyear) & (self.appearance_data['G_all'] > min_games)]['playerID']
+
+        return self.salary_data.loc[(self.salary_data['yearID'] >= startyear) & (self.salary_data['yearID'] <= 2019) & (self.salary_data['G_all'] > min_games)]['playerID']
 
     def get_playerid(self, last_name, first_name=None):
         if first_name:
