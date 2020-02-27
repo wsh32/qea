@@ -3,6 +3,9 @@ from api import BaseballData
 import numpy as np
 import sys
 import random
+import matplotlib.pyplot as plt
+
+random.seed(47)
 
 def project_vecs(anls, vecs, eig_count):
 	# project the data in vecs onto a specific number of eigenvectors in anls
@@ -13,6 +16,22 @@ def project_vecs(anls, vecs, eig_count):
 	#print("Shape of vectors to be projected", vecs.shape)
 
 	return np.matmul(eigs.transpose(), vecs)
+
+def generate_plot(data_api, title, anls, tests, ids, ids_tests):
+	# plots the top two vectors by 
+	player_space = project_vecs(anls, anls.vectors, 3)
+
+	salaries = []
+	for pid in ids:
+		salaries.append(data_api.get_mean_salary(pid))
+
+	cm = plt.cm.get_cmap('RdYlBu')
+	sc = plt.scatter(player_space[0, :], player_space[1, :], c=salaries, s=2, cmap=cm)
+	plt.colorbar(sc, label="Player Salary ($)")
+	plt.title("Player Salary by " + title + " Performance Features")
+	plt.xlabel("Principal Component #1")
+	plt.ylabel("Principal Component #2")
+	plt.show()
 
 def get_rms(data_api, eig_count, anls, tests, ids, ids_tests):
 	# run the classifier on the supplied data and return rms salary error
@@ -219,6 +238,12 @@ def main():
 	print("Pitching-based salary estimation RMS: ", rms_pit)
 	print("Batting-based  salary estimation RMS: ", rms_bat)
 	print("Fielding-based salary estimation RMS: ", rms_fld)
+
+	print("Generating plots ...")
+	generate_plot(data_api, "Pitching", *po)
+	generate_plot(data_api, "Batting", *bo)
+	generate_plot(data_api, "Fielding", *fo)
+	print("Done.")
 
 if __name__ == '__main__':
 	main()
