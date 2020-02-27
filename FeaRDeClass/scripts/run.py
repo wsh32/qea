@@ -99,10 +99,10 @@ def get_pca(data_api):
 				#pit_stats = np.append(pit_stats, pit, axis=0)
 				ids_pit += [pid] * ln
 			# Collate batting data
-			bat = data_api.get_player_batting(pid).to_numpy()[:, 5:]
+			bat = data_api.get_player_batting(pid)  # .to_numpy()[:, 5:]
 			ln = bat.shape[0]
 			if ln:
-				bat_stats[bstat_idx : bstat_idx + ln, :] = bat
+                                bat_stats[bstat_idx : bstat_idx + ln, :] = bat.to_numpy()[:, 5:]
 				bstat_idx += ln
 			#bat_stats = np.append(bat_stats, bat, axis=0)
 			ids_bat += [pid] * ln
@@ -110,7 +110,7 @@ def get_pca(data_api):
 			fld = data_api.get_player_fielding(pid).to_numpy()[:, 6:]
 			ln = fld.shape[0]
 			if ln:
-				fld_stats[fstat_idx : fstat_idx + ln, :] = fld
+                                fld_stats[fstat_idx : fstat_idx + ln, :] = fld.to_numpy()[:, 6:]
 				fstat_idx += ln
 			#fld_stats = np.append(fld_stats, fld, axis=0)
 			ids_fld += [pid] * fld.shape[0]
