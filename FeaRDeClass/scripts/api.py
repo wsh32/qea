@@ -9,7 +9,7 @@ class BaseballData:
                  batting_data_csv='data/Batting.csv',
                  fielding_data_csv='data/Fielding.csv',
                  salary_data_csv='data/Salaries.csv',
-                 startyear=2018, endyear=2019):
+                 startyear=2015, endyear=2016):
         self.startyear = startyear
         self.endyear = endyear
 
@@ -40,7 +40,7 @@ class BaseballData:
             startyear = self.startyear
         if endyear is None:
             endyear = self.endyear
-        return self.appearance_data.loc[(self.appearance_data['yearID'] >= startyear) & (self.appearance_data['yearID'] <= 2019) & (self.appearance_data['G_all'] > min_games)]['playerID']
+        return self.appearance_data.loc[(self.appearance_data['yearID'] >= startyear) & (self.appearance_data['yearID'] <= endyear) & (self.appearance_data['G_all'] > min_games)]['playerID']
 
     def get_playerid(self, last_name, first_name=None):
         if first_name:
@@ -55,7 +55,11 @@ class BaseballData:
 
     def is_pitcher(self, playerid):
         player_fielding_data = self._get_data(self.fielding_data, 'playerID', playerid)
-        return (player_fielding_data['POS'] == 'P').values[0]
+        try:
+            return (player_fielding_data['POS'] == 'P').values[0]
+        except IndexError:
+            # bit of a hack but this only happens if no pitching data is available\
+            return False
 
     def get_player_pitching(self, playerid):
         if not self.is_pitcher(playerid):

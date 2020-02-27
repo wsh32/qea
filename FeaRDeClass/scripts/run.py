@@ -28,9 +28,10 @@ def get_rms(data_api, eig_count, anls, tests, ids, ids_tests):
 
 		least = np.argsort(dists)[0] # index of closest vector in face space
 		least_id = ids[least]
-		l_salary = data_api.get_mean_salary(least_id)
 
+		l_salary = data_api.get_mean_salary(least_id)
 		salary = data_api.get_mean_salary(ids_tests[i])
+		#print("least_id", least_id, "ids_tests[i]", ids_tests[i])
 
 		sse += (l_salary - salary) ** 2
 
@@ -150,7 +151,7 @@ def get_pca(data_api):
 
 	pit_out = (pit_anls, pit_tests, ids_pit, ids_pit_tests)
 	bat_out = (bat_anls, bat_tests, ids_bat, ids_bat_tests)
-	fld_out = (fld_anls, bat_tests, ids_fld, ids_fld_tests)
+	fld_out = (fld_anls, fld_tests, ids_fld, ids_fld_tests)
 
 	return (pit_out, bat_out, fld_out)
 
