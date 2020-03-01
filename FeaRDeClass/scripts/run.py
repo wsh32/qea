@@ -183,19 +183,32 @@ def get_pca(data_api):
     fld_tests = np.where(np.isnan(fld_tests), np.ma.array(fld_tests, 
         mask = np.isnan(fld_tests)).mean(axis = 0), fld_tests)
 
-    # Convert tests to column vectors for later processing
+    # Convert to column vectors for later processing
     pit_tests = pit_tests.transpose()
     bat_tests = bat_tests.transpose()
     fld_tests = fld_tests.transpose()
+
+    pit_stats = pit_stats.transpose()
+    bat_stats = bat_stats.transpose()
+    fld_stats = fld_stats.transpose()
 
     # normalize all vectors
     pit_stats = zscore(pit_stats, axis=1)
     bat_stats = zscore(bat_stats, axis=1)
     fld_stats = zscore(fld_stats, axis=1)
 
-    pit_tests = zscore(pit_tests, axis=1)
-    bat_tests = zscore(bat_tests, axis=1)
-    fld_tests = zscore(fld_tests, axis=1)
+    pit_tests = zscore(pit_tests, axis=1, ddof=1)
+    bat_tests = zscore(bat_tests, axis=1, ddof=1)
+    fld_tests = zscore(fld_tests, axis=1, ddof=1)
+
+    # if zscore is undefined slap a 0 in there
+    pit_stats = np.where(np.isnan(pit_stats), 0, pit_stats) 
+    bat_stats = np.where(np.isnan(bat_stats), 0, bat_stats)
+    fld_stats = np.where(np.isnan(fld_stats), 0, fld_stats)
+
+    pit_tests = np.where(np.isnan(pit_tests), 0, pit_tests) 
+    bat_tests = np.where(np.isnan(bat_tests), 0, bat_tests)
+    fld_tests = np.where(np.isnan(fld_tests), 0, fld_tests)
 
     print("Nans? ", np.any(np.isnan(pit_stats)))
     print("Infs? ", np.any(np.isinf(pit_stats)))
@@ -206,9 +219,9 @@ def get_pca(data_api):
     print("Running PCA ...")
     #pit_anls = PCA(np.transpose(pitcher_stats), labels=(stat_names_pit + stat_names_bat + stat_names_fld))
     #nop_anls = PCA(np.transpose(nopitch_stats), labels=(stat_names_bat + stat_names_fld))
-    pit_anls = PCA(np.transpose(pit_stats), labels=stat_names_pit)
-    bat_anls = PCA(np.transpose(bat_stats), labels=stat_names_bat)
-    fld_anls = PCA(np.transpose(fld_stats), labels=stat_names_fld)
+    pit_anls = PCA(pit_stats, labels=stat_names_pit)
+    bat_anls = PCA(bat_stats, labels=stat_names_bat)
+    fld_anls = PCA(fld_stats, labels=stat_names_fld)
 
     pit_anls.find_eigens()
     bat_anls.find_eigens()
