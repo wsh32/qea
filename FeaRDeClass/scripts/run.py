@@ -6,8 +6,6 @@ import random
 import matplotlib.pyplot as plt
 from scipy.stats import zscore
 
-random.seed(47)
-
 def project_vecs(anls, vecs, eig_count):
     # project the data in vecs onto a specific number of eigenvectors in anls
     assert eig_count <= anls.ndim
@@ -24,9 +22,9 @@ def generate_plot(data_api, title, anls, tests, ids, ids_tests):
 
     salaries = []
     for pid in ids:
-        salaries.append(data_api.get_mean_salary(pid))
+        salaries.append(data_api.get_mean_log_salary(pid))
 
-    salaries = np.log10(salaries)
+    print("Log Salaries: Mean", np.mean(salaries), "Standard deviation", np.std(salaries))
 
     cm = plt.cm.get_cmap('RdYlBu')
     sc = plt.scatter(player_space[0, :], player_space[1, :], c=salaries, s=2, cmap=cm)
@@ -38,11 +36,13 @@ def generate_plot(data_api, title, anls, tests, ids, ids_tests):
 
 def get_rms(data_api, eig_count, anls, tests, ids, ids_tests):
     # run the classifier on the supplied data and return rms salary error
-    close_count = 5 #number of closest players of which to average salaries
-    close_sals = np.zeros(shape=(5,))
+    close_count = 20 #number of closest players of which to average salaries
+    close_sals = np.zeros(shape=(close_count,))
 
     player_space = project_vecs(anls, anls.vectors, eig_count)
     tests_projected = project_vecs(anls, tests, eig_count)
+
+    print("Using", tests.shape[1], "test values.")
 
     sse = 0 # sum of squared errors
 
@@ -57,11 +57,11 @@ def get_rms(data_api, eig_count, anls, tests, ids, ids_tests):
         # average the salaries of the nearest 5 points in player space
         for j in range(close_count):
             least_id = ids[least[j]]
-            close_sals[j] = data_api.get_mean_salary(least_id)
+            close_sals[j] = data_api.get_mean_log_salary(least_id)
             close_sals[j] = np.nan if close_sals[j] == 0 else close_sals[j]
 
         l_salary = np.nanmean(close_sals)
-        salary = data_api.get_mean_salary(ids_tests[i])
+        salary = data_api.get_mean_log_salary(ids_tests[i])
 
         if (l_salary == 0) or (l_salary == np.nan) or (salary == 0):
             # salary data is missing for one or more of the relevant players
@@ -222,6 +222,8 @@ def get_pca(data_api):
     return (pit_out, bat_out, fld_out)
 
 def main():
+    random.seed(47)
+
     print("Importing player data ...")
     data_api = BaseballData(startyear=2000, endyear=2016)
     print("Done.")

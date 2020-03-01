@@ -83,3 +83,11 @@ class BaseballData:
         else:
             return mean_salary
 
+    def get_mean_log_salary(self, playerid):
+        log_salary = np.log10(self.get_salaries(playerid).salary.values)
+        mean_log_salary = np.mean(log_salary)
+        if np.isnan(mean_log_salary):
+            return 0
+        else:
+            return mean_log_salary
+
