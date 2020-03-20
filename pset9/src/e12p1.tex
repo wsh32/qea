@@ -1,0 +1,15 @@
+Draw the unit vectors that define the global and ramp frame co-located at the same origin. Specify the angle $\theta$ that defines the rotation between the two coordinate systems.
+
+\begin{solution}\
+\begin{center}
+\begin{tikzpicture}
+  \draw[thin,gray!40] (-1,-1) grid (2,2);
+  \draw[line width=2pt,black,-stealth](0,0)--(0,2) node[anchor=south]{$\hat{i}$} coordinate (i);
+  \draw[line width=2pt,black,-stealth](0,0)--(2,0) node[anchor=west]{$\hat{j}$};
+  \draw[line width=2pt,blue,-stealth](0,0)--(1.932,-.518) node[anchor=north west]{$\hat{x}$};
+  \draw[line width=2pt,blue,-stealth](0,0)--(0.518,1.932) node[anchor=south west]{$\hat{y}$} coordinate (y);
+  \coordinate (origin) at (0, 0);
+  \pic [draw, <->, "$\theta$", anchor=west] {angle = y--origin--i};
+\end{tikzpicture}
+\end{center}
+\end{solution}
