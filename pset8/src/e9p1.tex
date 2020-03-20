@@ -1,0 +1,22 @@
+Find a set of parametric equations that define an ellipse, and use MATLAB to verify them visually. Show that the parametric equations satisfy the implicit equation for an ellipse.
+
+\begin{solution}
+\begin{align*}
+    x = a\cos{u}, y = b\sin{u}, u\in\left[ 0, 2\pi \right]
+\end{align*}
+
+\begin{lstlisting}
+u = linspace(0, 2*pi, 1000);
+a = 2;
+b = 1.5;
+x = a*cos(u);
+y = b*sin(u);
+plot(x, y, '.')
+axis equal
+grid on
+\end{lstlisting}
+
+\begin{center}
+    \includegraphics[width=0.75\textwidth]{img/e9p1.png}
+\end{center}
+\end{solution}

@@ -1,0 +1,26 @@
+Lookup the parametric equations that define an ellipsoid, and use MATLAB to visualize.
+
+\begin{solution}
+\begin{align*}
+    x &= a \cos\theta \sin\phi \\
+    y &= b \sin\theta \sin\phi \\
+    z &= c \cos\phi \\
+\end{align*}
+
+\begin{lstlisting}
+a = 1.5;
+b = 1;
+c = 1;
+[u, v] = meshgrid(linspace(0,2*pi,200),linspace(0,2*pi,200));
+x = a*cos(u).*sin(v);
+y = b*sin(u).*sin(v);
+z = c*cos(v);
+surf(x, y, z)
+shading interp
+axis equal
+\end{lstlisting}
+
+\begin{center}
+    \includegraphics[width=0.5\textwidth]{img/e15p1.png}
+\end{center}
+\end{solution}
