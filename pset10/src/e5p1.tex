@@ -1,0 +1,27 @@
+Find the total mass and center of mass of the 1cm thin aluminum plate bounded by the parabola $y=x^2$, $y=10$, and $x=0$. Assume $x$ and $y$ are measured in centimeters.
+
+\begin{solution}
+    \begin{align*}
+        M &= H\int_{0}^{10}\int_{0}^{\sqrt{y}}\rho dx dy \\
+        M &= \rho \int_{0}^{10} \sqrt{y} dy \\
+        M &= \rho \frac{2}{3} y^{\frac{3}{2}} \bigg|_{0}^{10} \\
+        M &= \rho \frac{2}{3} 10^{\frac{3}{2}} \\
+        M &\approx 56.9
+    \end{align*}
+    
+    \begin{align*}
+        x_{COM} &= \frac{H}{M}\int_{0}^{10}\int_{0}^{\sqrt{y}}x\rho dx dy \\
+        x_{COM} &= \frac{\rho}{\rho \frac{2}{3} 10^{\frac{3}{2}}} \int_{0}^{10} \frac{y}{2} dy \\
+        x_{COM} &= \frac{3}{2\left(10^\frac{3}{2}\right)} \left(\frac{y^2}{4} \bigg|_{0}^{10}\right) \\
+        x_{COM} &= \frac{3}{2\left(10^\frac{3}{2}\right)} \left(\frac{10^2}{4}\right) \\
+        x_{COM} &= \frac{3}{8} 10^{1/2} \\
+        x_{COM} &\approx 1.186
+    \end{align*}
+    
+    \begin{align*}
+        y_{COM} &= \frac{H}{M}\int_{0}^{10}\int_{0}^{\sqrt{y}}y\rho dx dy \\
+        y_{COM} &= \frac{\rho}{\rho \frac{2}{3} 10^{\frac{3}{2}}} \int_{0}^{10} y^{\frac{3}{2}} dy \\
+        y_{COM} &= \frac{3}{2\left(10^\frac{3}{2}\right)} \left(\frac{y^{\frac{5}{2}}}{\frac{5}{2}} \bigg|_{0}^{10}\right) \\
+        y_{COM} &= 6
+    \end{align*}
+\end{solution}
