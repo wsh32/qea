@@ -1,0 +1,15 @@
+Plot the position of the center of mass for the range $0 \leq \phi \leq 4\pi$. 
+
+\begin{solution} \
+\begin{lstlisting}
+phi = [0:0.1:4*pi];
+x_cg = r * phi - (r - ybar)*sin(phi);
+y_cg = r - (r - ybar)*cos(phi);
+plot(x_cg, y_cg, '.')
+axis equal
+\end{lstlisting}
+
+\begin{center}
+    \includegraphics[width=0.5\textwidth]{img/e3p1.png}
+\end{center}
+\end{solution}
