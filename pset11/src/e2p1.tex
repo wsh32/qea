@@ -1,0 +1,32 @@
+Use symbolic math in Matlab to find $\bar{y}$ and the total area of the segment.
+
+\begin{solution} \
+\begin{lstlisting}
+%define circular segment parameters
+r=6;
+h=2;
+
+%specify symbolic values using the matlab 'syms' function
+syms r_sym h_sym y
+
+%first define x using the definition of a circle with center at [0,R], ...
+%x^2+(y-R)^2=R^2
+x=sqrt(r_sym^2-(y-r_sym)^2);
+
+%Setup the integral, symbolically, for the area of the circular segment. ... 
+%This integral is A=2*int(x). We will do this using the 'int' function ...
+%in Matlab which takes inputs as int(symbolic_equation, ...
+%symbolic_variable_of_integration, [lower bound, upper bound])
+A=2*int(x,y,[0 h_sym]);
+
+%Do the integral for the centroid symbolically
+ybar=int(y*x,y,[0 h_sym])/int(x,y,[0 h_sym]);
+
+%substitute numerical values for r and h and convert the output to a ...
+%double. The 'subs' function takes inputs in the form subs(equation, ...
+%old, new)
+
+A=double(subs(A,[r_sym, h_sym],[r, h]));
+ybar=double(subs(ybar,[r_sym, h_sym],[r, h]));
+\end{lstlisting}
+\end{solution}
