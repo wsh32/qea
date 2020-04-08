@@ -1,0 +1,1 @@
+docker stop neato; docker rm --force neato; docker run --rm --name=neato --sysctl net.ipv4.ip_local_port_range="32401 32767" -p 11311:11311 -p 8080:8080 -p 32401-32767:32401-32767 -e NEATO_WORLD=empty_no_spawn -it qeacourse/robodocker:spring2020
