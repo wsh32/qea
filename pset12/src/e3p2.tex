@@ -1,0 +1,24 @@
+Determine the unit tangent vector using the Symbolic Toolbox in MATLAB.
+
+\begin{solution} \
+\begin{lstlisting}
+syms a b x0 y0 u
+assume(a, {'real', 'positive'})
+assume(b, {'real', 'positive'})
+assume(x0, {'real'})
+assume(y0, {'real'})
+assume(u, {'real', 'positive'})
+
+ri = a*cos(u)+x0;
+rj = b*sin(u)+y0;
+rk = 0;
+r = [ri, rj, rk];
+dr = diff(r, u);
+
+T_hat = simplify(dr ./ norm(dr))
+\end{lstlisting}
+
+\begin{align*}
+    \boldsymbol{\hat{T}} = -\frac{a\sin u}{\sqrt{a^2\sin^2u + b^2\cos^2u}} \hat{\boldsymbol{i}} + \frac{b\cos u}{\sqrt{a^2\sin^2u + b^2\cos^2u}} \hat{\boldsymbol{j}}
+\end{align*}
+\end{solution}

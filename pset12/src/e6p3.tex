@@ -1,0 +1,10 @@
+Determine the acceleration of this moving body, and decompose the acceleration into the unit tangent and unit normal directions.
+
+\begin{solution}
+\begin{align*}
+    \boldsymbol{a}(t) &= -ac^2\cos(ct) \hat{\boldsymbol{i}} - bc^2\sin(ct) \hat{\boldsymbol{j}} \\
+    \boldsymbol{\hat{T}}(t) &= \frac{a\sin(ct)}{\sqrt{a^2\sin(ct)^2+b^2\cos(ct)^2}} \hat{\boldsymbol{i}} + \frac{b\cos(ct)}{\sqrt{a^2\sin(ct)^2+b^2\cos(ct)^2}} \hat{\boldsymbol{j}} \\
+    \boldsymbol{\hat{N}}(t) &= -\frac{b\cos(ct)}{\sqrt{a^2\sin(ct)^2+b^2\cos(ct)^2}} \hat{\boldsymbol{i}} - \frac{a\sin(ct)}{\sqrt{a^2\sin(ct)^2+b^2\cos(ct)^2}} \hat{\boldsymbol{j}} \\
+    \boldsymbol{a}(t) &= \frac{c^{2} \sin (2 c t)\left(a^{2}-b^{2}\right)}{2 \sqrt{-a^{2} \cos (c t)^{2}+a^{2}+b^{2} \cos (c t)^{2}}} \boldsymbol{\hat{T}} + \frac{a b c^{2}}{\sqrt{a^{2} \sin (c t)^{2}-b^{2} \sin (c t)^{2}+b^{2}}} \boldsymbol{\hat{N}}
+\end{align*}
+\end{solution}

@@ -1,0 +1,11 @@
+Set up the integral to compute the perimeter of the ellipse using the Symbolic Toolbox in MATLAB.
+
+\begin{solution} \
+\begin{lstlisting}
+L = simplify(int(norm(dr), u, [0 2*pi]))
+\end{lstlisting}
+
+\begin{align*}
+    L &= \int_{0}^{2 \pi} \sqrt{a^{2}\sin (u)^{2}+b^{2}\cos (u)^{2}} du
+\end{align*}
+\end{solution}

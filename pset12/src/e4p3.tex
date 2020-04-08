@@ -1,0 +1,13 @@
+Determine the acceleration of this moving body, and decompose the acceleration into the unit tangent and unit normal directions.
+
+\begin{solution}
+\begin{align*}
+    \boldsymbol{a}(t) &= \boldsymbol{v}'(t) \\
+    &= \left(-2R \alpha \sin \left( \alpha t^2 \right) - 4R \alpha^2t^2\cos\left(\alpha t^2\right) \right)\hat{\boldsymbol{i}} + \left(2R \alpha \cos \left( \alpha t^2 \right) - 4R \alpha^2t^2\sin\left(\alpha t^2\right) \right)\hat{\boldsymbol{j}} \\
+    \boldsymbol{\hat{T}}(t) &= \frac{\boldsymbol{r}'(t)}{|\boldsymbol{r}'(t)|} \\
+    &= -\sin\left(\alpha t^2\right) + \cos\left(\alpha t^2\right) \\
+    \boldsymbol{\hat{N}}(t) &= \frac{\boldsymbol{\hat{T}}'(t)}{|\boldsymbol{\hat{T}}'(t)|} \\
+    &= -\cos\left(\alpha t^2\right) - \sin\left(\alpha t^2\right) \\
+    \boldsymbol{a}(t) &= 2R\alpha \boldsymbol{\hat{T}} + 4R\alpha^2t^2 \boldsymbol{\hat{N}}
+\end{align*}
+\end{solution}

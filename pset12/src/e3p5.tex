@@ -1,0 +1,13 @@
+Determine the curvature and torsion using the Symbolic Toolbox in MATLAB.
+
+\begin{solution} \
+\begin{lstlisting}
+kappa = simplify(norm(dT) ./ norm(dr))  
+tau = dot(-N_hat, B_hat ./ norm(dr))
+\end{lstlisting}
+
+\begin{align*}
+    \kappa &= \frac{a b}{\left(a^{2} \sin (u)^{2}-b^{2} \sin (u)^{2}+b^{2}\right)^{3 / 2}} \\
+    \tau &= 0
+\end{align*}
+\end{solution}

@@ -1,0 +1,12 @@
+Determine the unit normal vector using the Symbolic Toolbox in MATLAB.
+
+\begin{solution} \
+\begin{lstlisting}
+dT = diff(T_hat, u);
+N_hat = simplify(dT ./ norm(dT))
+\end{lstlisting}
+
+\begin{align*}
+    \boldsymbol{\hat{N}} = -\frac{b \cos (u)}{\sqrt{a^{2} \sin (u)^{2}+b^{2} \cos (u)^{2}}} \hat{\boldsymbol{i}} + \frac{a \sin (u)}{\sqrt{a^{2} \sin (u)^{2}+b^{2} \cos (u)^{2}}} \hat{\boldsymbol{j}}
+\end{align*}
+\end{solution}
