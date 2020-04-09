@@ -1,0 +1,28 @@
+The vector for a counterclockwise path around an ellipse is given by:
+
+\begin{align*}
+    \boldsymbol{r}(t) = a \cos(\alpha t) \hat{\boldsymbol{i}} + b \sin(\alpha t) \hat{\boldsymbol{j}}
+\end{align*}
+
+What is the tangent vector for the ellipse?
+
+\begin{solution} \
+\begin{lstlisting}
+syms a b alpha t
+
+assume(a, {'real', 'positive'})
+assume(b, {'real', 'positive'})
+assume(alpha, {'real', 'positive'})
+assume(t, {'real', 'positive'})
+
+ri = a * cos(alpha*t);
+rj = b * sin(alpha*t);
+r = [ri, rj, 0]
+
+vel = diff(r)
+\end{lstlisting}
+
+\begin{align*}
+    \boldsymbol{V} = -a \alpha \sin(\alpha t) \hat{\boldsymbol{i}} + b \alpha \cos(\alpha t) \hat{\boldsymbol{j}}
+\end{align*}
+\end{solution}

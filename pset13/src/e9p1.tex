@@ -1,0 +1,17 @@
+Find the Hessian matrix of the function $f(x, y) = 3x^2y + y^3 - 3x^2 - 3y^2 + 2$ and evaluate it at point $(1, 2)$.
+
+\begin{solution}
+\begin{align*}
+    \mathrm{Hess} f &= \begin{bmatrix}
+        \frac{\partial^2 f}{\partial x^2} & \frac{\partial^2 f}{\partial x \partial y} \\
+        \frac{\partial^2 f}{\partial y \partial x} & \frac{\partial^2 f}{\partial y^2} \\
+    \end{bmatrix} = \begin{bmatrix}
+        6y-6 & 6x \\
+        6x & 6y - 6
+    \end{bmatrix} \\
+    \mathrm{Hess} f(1, 2) &= \begin{bmatrix}
+        6 & 6 \\
+        6 & 6
+    \end{bmatrix}
+\end{align*}
+\end{solution}

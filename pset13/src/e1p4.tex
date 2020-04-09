@@ -1,0 +1,12 @@
+What is the unit normal vector?
+
+\begin{solution} \
+\begin{lstlisting}
+dT = diff(T);
+N = simplify(dT ./ norm(dT))
+\end{lstlisting}
+
+\begin{align*}
+    \boldsymbol{\hat{N}} &= -\cos(\alpha t) \hat{\boldsymbol{i}} - \sin(\alpha t) \hat{\boldsymbol{j}}
+\end{align*}
+\end{solution}

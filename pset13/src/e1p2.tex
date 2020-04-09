@@ -1,0 +1,22 @@
+What are the linear velocity vector and linear speed?
+
+\begin{solution} \
+\begin{lstlisting}
+syms R alpha t
+assume(R, {'real', 'positive'})
+assume(t, {'real', 'positive'})
+assume(alpha, {'real'})
+
+ri = R*cos(alpha*t);
+rj = R*sin(alpha*t);
+r = [ri, rj, 0]
+
+vel = diff(r)
+speed = simplify(norm(vel))
+\end{lstlisting}
+
+\begin{align*}
+    v &= -R \alpha \sin(\alpha t) \hat{\boldsymbol{i}} + R \alpha \cos(\alpha t) \hat{\boldsymbol{j}}\\
+    s &= R\left|\alpha\right|
+\end{align*}
+\end{solution}

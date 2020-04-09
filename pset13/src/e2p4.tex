@@ -1,0 +1,12 @@
+What is the unit normal vector?
+
+\begin{solution} \
+\begin{lstlisting}
+dT = diff(T);
+N = simplify(dT ./ norm(dT))
+\end{lstlisting}
+
+\begin{align*}
+    \hat{\boldsymbol{N}} = -\frac{b \cos(\alpha t)}{\sqrt{a^2 \sin(\alpha)^2 + b^2 \cos(\alpha t)^2}} \hat{\boldsymbol{i}} - \frac{a \sin(\alpha t)}{\sqrt{a^2 \sin(\alpha)^2 + b^2 \cos(\alpha t)^2}} \hat{\boldsymbol{j}}
+\end{align*}
+\end{solution}

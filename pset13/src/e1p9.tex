@@ -1,0 +1,21 @@
+What are the equations for the left and right wheel velocities for the uniform circle?
+
+\begin{solution}
+\begin{align*}
+    V_L &= V - \omega\frac{d}{2} \\
+    V_R &= V + \omega\frac{d}{2}
+\end{align*}
+
+\begin{lstlisting}
+syms d
+assume(d, {'real', 'positive'})
+
+V_L = simplify(V_T - w(3) * d / 2)
+V_R = simplify(V_T + w(3) * d / 2)
+\end{lstlisting}
+
+\begin{align*}
+    V_L &= R \alpha-\frac{\alpha \,d}{2} \\
+    V_R &= R \alpha+\frac{\alpha \,d}{2}
+\end{align*}
+\end{solution}

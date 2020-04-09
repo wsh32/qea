@@ -1,0 +1,11 @@
+What is the unit tangent vector for the circle?
+
+\begin{solution} \
+\begin{lstlisting}
+T = simplify(vel ./ norm(vel))
+\end{lstlisting}
+
+\begin{align*}
+    \boldsymbol{\hat{T}} &= -\frac{\alpha \sin(\alpha t)}{\left|\alpha\right|}\hat{\boldsymbol{i}} + \frac{\alpha \cos(\alpha t)}{\left|\alpha\right|}\hat{\boldsymbol{j}}
+\end{align*}
+\end{solution}

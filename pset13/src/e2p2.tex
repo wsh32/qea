@@ -1,0 +1,11 @@
+What is the unit tangent vector for the ellipse?
+
+\begin{solution} \
+\begin{lstlisting}
+T = simplify(vel ./ norm(vel))
+\end{lstlisting}
+
+\begin{align*}
+    \hat{\boldsymbol{T}} = -\frac{a \sin(\alpha t)}{\sqrt{a^2 \sin(\alpha)^2 + b^2 \cos(\alpha t)^2}} \hat{\boldsymbol{i}} + \frac{b \cos(\alpha t)}{\sqrt{a^2 \sin(\alpha)^2 + b^2 \cos(\alpha t)^2}} \hat{\boldsymbol{j}}
+\end{align*}
+\end{solution}

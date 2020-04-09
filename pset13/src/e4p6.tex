@@ -1,0 +1,52 @@
+Using what you have learned from the examples above, write a program that meets the following requirements:
+
+\begin{itemize}
+    \item The program commands the robot to drive a designated distance at a chosen speed, and stops when that distance is reached.
+    \item If the bump sensor is triggered, the robot reverses direction and backs up for 5 seconds then stops.
+\end{itemize}
+
+\begin{solution} \
+\begin{lstlisting}
+function [] = driveUntilBumpThenRunAway(speed, distance)
+    pub = rospublisher('/raw_vel');
+    sub_bump = rossubscriber('/bump');
+    msg = rosmessage(pub);
+
+    % get the robot moving
+    msg.Data = [speed, speed];
+    send(pub, msg);
+
+    start = rostime('now');
+    
+    reverseFlag = 0;
+    reverseStart = 0;
+    
+    while 1
+        current = rostime('now');
+        elapsed = current - start;
+        if (elapsed.seconds > distance/speed) && (reverseFlag == 0) % Here we are saying the if the elapsed time is greater than 
+            %distance/speed, we have reached our desired distance and we should stop
+
+            message.Data = [0,0]; % set wheel velocities to zero if we have reached the desire distance
+            send(pubvel, message); % send new wheel velocities
+            break %leave this loop once we have reached the stopping time
+        end
+        
+        % wait for the next bump message
+        bumpMessage = receive(sub_bump);
+        % check if any of the bump sensors are set to 1 (meaning triggered)
+        if any(bumpMessage.Data)
+            reverseFlag = 1;
+            reverseStart = rostime('now');
+        end
+        
+        reverseElapsed = current - reverseStart;
+        if (reverseElapsed.seconds > 5) && (reverseFlag == 1)
+            message.Data = [0, 0];
+            send(pubvel, message);
+            break
+        end
+    end
+end
+\end{lstlisting}
+\end{solution}

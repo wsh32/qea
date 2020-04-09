@@ -1,0 +1,21 @@
+What are the equations for the left and right wheel velocities?
+
+\begin{solution}
+\begin{align*}
+    V_L &= V - \omega\frac{d}{2} \\
+    V_R &= V + \omega\frac{d}{2}
+\end{align*}
+
+\begin{lstlisting}
+syms d
+assume(d, {'real', 'positive'})
+
+V_L = simplify(V_T - w(3) * d / 2)
+V_R = simplify(V_T + w(3) * d / 2)
+\end{lstlisting}
+
+\begin{align*}
+    V_L &= \alpha \sqrt{a^{2} \sin (\alpha t)^{2}+b^{2} \cos (\alpha t)^{2}}-\frac{a b \alpha}{a^{2} \sin ^{2}(\alpha t)+b^{2} \cos ^{2}(\alpha t)} \frac{d}{2} \\
+    V_R &= \alpha \sqrt{a^{2} \sin (\alpha t)^{2}+b^{2} \cos (\alpha t)^{2}}+\frac{a b \alpha}{a^{2} \sin ^{2}(\alpha t)+b^{2} \cos ^{2}(\alpha t)} \frac{d}{2}
+\end{align*}
+\end{solution}
