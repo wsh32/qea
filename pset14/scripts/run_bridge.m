@@ -1,10 +1,17 @@
 function run_bridge()
 % Insert any setup code you want to run here
+save data/b.mat
+collectDataset_sim('data/b.mat');
+
+music = 0;
+
+% TOKYO DRIFT
+[y, Fs] = audioread('tokyo_drift.mp3');
 
 % define u explicitly to avoid error when using sub functions
 % see: https://www.mathworks.com/matlabcentral/answers/268580-error-attempt-to-add-variable-to-a-static-workspace-when-it-is-not-in-workspace
 u = [];
-% u will be our parameter
+% u will be our parameter 
 syms u;
 
 % this is the equation of the bridge
@@ -51,6 +58,12 @@ c_num = 1/3;
 msg = rosmessage(pub);
 
 start = rostime('now');
+
+% start music
+if music == 1
+    sound(y, Fs, 16);
+end
+
 while 1
     elapsed = rostime('now') - start;
     speed_l = double(subs(VL, [c, t], [c_num, elapsed.seconds]));
@@ -63,7 +76,10 @@ while 1
         send(pub, stopMsg);
         break
     end
+    pause(0.01);
 end
+
+clear sound
 
 % For simulated Neatos only:
 % Place the Neato in the specified x, y position and specified heading vector.
