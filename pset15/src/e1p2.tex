@@ -1,0 +1,13 @@
+Find $\frac{dw}{dt}$.
+
+\begin{align*}
+    w &= xe^\frac{y}{z}, x = t^2, y = 1 - t, z = 1 + 2t \\
+\end{align*}
+
+\begin{solution}
+\begin{align*}
+    \frac{dw}{dt} &= \left(e^\frac{y}{z}\right)(2t) + \left(\frac{x}{z}e^\frac{y}{z}\right)(-1) + xe^\frac{y}{z}(-1)\left(\frac{y}{z^2}\right)(2) \\
+    \frac{dw}{dt} &= e^\frac{y}{z}\left(2t - \frac{x}{z} - 2x \left(\frac{y}{z^2}\right)\right) \\
+    \frac{dw}{dt} &= e^\frac{y}{z}\left(2t - \frac{x}{z}\left(1 + \frac{2y}{z}\right)\right)
+\end{align*}
+\end{solution}

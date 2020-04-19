@@ -1,0 +1,47 @@
+Classify the critical points of the following functions.
+
+\begin{align*}
+    f(x, y) = 3x^2y + y^3 - 3x^2 - 3y^2 + 2
+\end{align*}
+
+\begin{solution}
+\begin{align*}
+    \mathrm{Hess} f = \begin{bmatrix}
+        6y - 6 & 6x \\
+        6x & 6y - 6
+    \end{bmatrix}
+\end{align*}
+
+At $(0, 0)$
+\begin{align*}
+    \mathrm{Hess} f = \begin{bmatrix}
+        -6 & 0 \\
+        0 & -6
+    \end{bmatrix} \\
+    \lambda = -6
+\end{align*}
+
+The critical point $(0, 0)$ is a local maximum
+
+At $(1, 1)$
+\begin{align*}
+    \mathrm{Hess} f = \begin{bmatrix}
+        0 & 6 \\
+        6 & 0
+    \end{bmatrix} \\
+    \lambda = 6
+\end{align*}
+
+The critical point $(1, 1)$ is a local minimum.
+
+At $(-1, -1)$
+\begin{align*}
+    \mathrm{Hess} f = \begin{bmatrix}
+        -12 & -6 \\
+        -6 & -12
+    \end{bmatrix} \\
+    \lambda = -6, -18
+\end{align*}
+
+The critical point $(1, 1)$ is a local maximum.
+\end{solution}

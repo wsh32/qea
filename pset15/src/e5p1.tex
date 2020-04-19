@@ -1,0 +1,36 @@
+Classify the critical points of the following functions.
+
+\begin{align*}
+    f(x, y) = 4 + x^3 + y^3 - 3xy
+\end{align*}
+
+\begin{solution}
+\begin{align*}
+    \mathrm{Hess} f = \begin{bmatrix}
+        6x & -3 \\
+        -3 & 6y
+    \end{bmatrix}
+\end{align*}
+
+At $(0, 0)$
+\begin{align*}
+    \mathrm{Hess} f = \begin{bmatrix}
+        0 & -3 \\
+        -3 & 0
+    \end{bmatrix} \\
+    \lambda = \pm 3
+\end{align*}
+
+The critical point $(0, 0)$ is a saddle point.
+
+At $(1, 1)$
+\begin{align*}
+    \mathrm{Hess} f = \begin{bmatrix}
+        6 & -3 \\
+        -3 & 6
+    \end{bmatrix} \\
+    \lambda = 3, 9
+\end{align*}
+
+The critical point $(1, 1)$ is a local minimum.
+\end{solution}

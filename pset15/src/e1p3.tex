@@ -1,0 +1,17 @@
+Find $\frac{\partial z}{\partial s}$ and $\frac{\partial z}{\partial t}$.
+
+\begin{align*}
+    z = e^r \cos(\theta), r = st, \theta = \sqrt{s^2 + t^2}
+\end{align*}
+
+\begin{solution}
+\begin{align*}
+    \frac{\partial z}{\partial s} &= \frac{\partial z}{\partial r} \frac{\partial r}{\partial s} +  \frac{\partial z}{\partial \theta} \frac{\partial \theta}{\partial s} \\
+    \frac{\partial z}{\partial s} &= \left(e^r\cos\theta\right)(t) + \left(-e^r\sin\theta\right)\left(s\left(s^2+t^2\right)^-\frac{1}{2}\right) \\
+    \frac{\partial z}{\partial s} &= e^r\left(t\cos\theta - \frac{s + \sin\theta}{\sqrt{s^2 + t^2}}\right) \\
+    \\
+    \frac{\partial z}{\partial t} &= \frac{\partial z}{\partial r} \frac{\partial r}{\partial t} +  \frac{\partial z}{\partial \theta} \frac{\partial \theta}{\partial t} \\
+    \frac{\partial z}{\partial t} &= \left(e^r\cos\theta\right)(s) + \left(-e^r\sin\theta\right)\left(t\left(s^2+t^2\right)^-\frac{1}{2}\right) \\
+    \frac{\partial z}{\partial t} &= e^r\left(s\cos\theta - \frac{t + \sin\theta}{\sqrt{s^2 + t^2}}\right) \\
+\end{align*}
+\end{solution}
