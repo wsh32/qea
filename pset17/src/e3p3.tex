@@ -1,0 +1,21 @@
+Express the location of the square object in the global frame G. Assume that the center of rotation of the NEATO is located at $(x_N, y_N)_G$.
+
+\begin{solution}
+\begin{align*}
+    T_{GN} &= \begin{bmatrix}
+        1 & 0 & x_n \\
+        0 & 1 & y_n \\
+        0 & 0 & 1
+    \end{bmatrix} \\
+    R_{GN} &= \begin{bmatrix}
+        \cos\phi & -\sin\phi & 0 \\
+        \sin\phi & \cos\phi & 0 \\
+        0 & 0 & 1
+    \end{bmatrix} \\
+    r_G &= R_GN T_GN T_NL r_L \\
+    &= \begin{bmatrix}
+        r \cos(\theta + \phi) - d \cos\phi + x_N \\
+        r \sin(\theta + \phi) - d \sin\phi + y_N
+    \end{bmatrix}
+\end{align*}
+\end{solution}
