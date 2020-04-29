@@ -1,0 +1,20 @@
+Find the Jacobian for the following vector fields
+
+\begin{align*}
+    \boldsymbol{F}(x, y, z) = yz \boldsymbol{\hat{i}} + xz \boldsymbol{\hat{j}} + xy \boldsymbol{\hat{k}}
+\end{align*}
+
+\begin{solution}
+\begin{align*}
+    J\boldsymbol{F} &= \begin{bmatrix}
+        \frac{\partial X}{x} & \frac{\partial X}{y} & \frac{\partial X}{z} \\
+        \frac{\partial Y}{x} & \frac{\partial Y}{y} & \frac{\partial Y}{z} \\
+        \frac{\partial Z}{x} & \frac{\partial Z}{y} & \frac{\partial Z}{z} \\
+    \end{bmatrix} \\
+    &= \begin{bmatrix}
+        0 & z & y \\
+        z & 0 & x \\
+        y & x & 0
+    \end{bmatrix}
+\end{align*}
+\end{solution}
