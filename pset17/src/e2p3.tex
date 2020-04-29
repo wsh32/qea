@@ -1,0 +1,40 @@
+Plot the frame M coordinates $(3, -2)_M$ Now express the frame M coordinates $(3, -2)_M$ in the frame G, and confirm that this is the same point by plotting it using the frame G.
+
+\begin{solution}
+\begin{align*}
+    R_{GM}T_{GM} &= \begin{bmatrix}
+        \cos{\frac{\pi}{3}} & -\sin{\frac{\pi}{3}} & 0 \\
+        \sin{\frac{\pi}{3}} & \cos{\frac{\pi}{3}} & 0 \\
+        0 & 0 & 1 \\
+    \end{bmatrix} \begin{bmatrix}
+        1 & 0 & -3 \\
+        0 & 1 & 1 \\
+        0 & 0 & 1 \\
+    \end{bmatrix} \\
+    &= \begin{bmatrix}
+        0.5 & -0.866 & -2.366 \\
+        0.866 & 0.5 & -2.098 \\
+        0 & 0 & 1
+    \end{bmatrix} \\
+    r_M &= R_{MG} T_{MG} r_G \\
+    &= \begin{bmatrix}
+        2.634 \\
+       -4.098 \\
+        1
+    \end{bmatrix} \\
+    r_G &= 2.634 \boldsymbol{\hat{i}}_G - 4.098 \boldsymbol{\hat{j}}_G
+\end{align*}
+
+\begin{center}
+\begin{tikzpicture}
+    \draw[thin,gray!40] (-4,-5) grid (4,3);
+    \draw[<->] (-4,0)--(4,0) node[right]{$x$};
+    \draw[<->] (0,-5)--(0,3) node[above]{$y$};
+    \draw[line width=2pt,blue,-stealth](0,0)--(1,0) node[anchor=south west]{$\boldsymbol{\hat{i}}_G$};
+    \draw[line width=2pt,blue,-stealth](0,0)--(0,1) node[anchor=south west]{$\boldsymbol{\hat{j}}_G$};
+    \draw[line width=2pt,red,-stealth](-3,1)--(-2.5,1.866) node[anchor=south west]{$\boldsymbol{\hat{i}}_M$};
+    \draw[line width=2pt,red,-stealth](-3,1)--(-3.866,1.5) node[anchor=south west]{$\boldsymbol{\hat{j}}_M$};
+    \node [red] at (2.634,-4.098) {\textbullet};
+\end{tikzpicture}
+\end{center}
+\end{solution}
