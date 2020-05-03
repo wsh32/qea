@@ -17,7 +17,11 @@ points = [x_scan y_scan];
 plot(x_scan, y_scan, '.')
 axis equal
 
-[x, y] = meshgrid(min(x_scan)-0.5:0.05:max(x_scan)+0.5, min(y_scan)-0.5:0.05:max(y_scan)+0.5);
+resolution = 0.05;
+offset = 0.5;
+x_grid = resolution * round((min(x_scan)-offset:resolution:max(x_scan)+offset) / resolution);
+y_grid = resolution * round((min(y_scan)-offset:resolution:max(y_scan)+offset) / resolution);
+[x, y] = meshgrid(x_grid, y_grid);
 f = 0;
 
 % find walls
@@ -37,7 +41,7 @@ end
 d = 0.01;
 n = 10000;
 r_max = 0.3;
-circle_weight = 5;
+circle_weight = 1;
 [circle_endpoints, circle_inliers, circle_outliers, near_matches, center, radius] = ransac_circle_fit(points, r_max, d, n, 0);
 
 % place sink at circle center
@@ -46,7 +50,7 @@ f = f + circle_weight * log(sqrt((x-center(1)).^2 + (y-center(2)).^2));
 % find obstacles
 d = 0.01;
 n = 1000;
-obstacle_weight = 0.025;
+obstacle_weight = 0.0125;
 % should be 3 walls
 while length(points) >= 3
     [endpoints, inliers, outliers, m, b] = ransac_line_fit(points, d, n, 0);
@@ -57,6 +61,26 @@ while length(points) >= 3
 end
 
 
-contour(x, y, f)
+contour(x, y, f, 'ShowText', 'On')
 [u, v] = gradient(f);
 quiver(x, y, -u, -v)
+
+% Find path of robot from orgin
+r = [0 0];
+lambda = .75;
+delta = 0.99;
+threshold = -5;
+while 1
+    r_round = resolution * round(r / resolution);
+    r_grad = -[u(y_grid == r_round(2), x_grid == r_round(1)), v(y_grid == r_round(2), x_grid == r_round(1))] * lambda;
+    quiver(r(1), r(2), r_grad(1), r_grad(2), 'c', 'LineWidth', 2, 'MaxHeadSize', 0.5)
+    
+    r = r + r_grad;
+    %z = double(subs(f, [x, y], [r(1), r(2)]));
+    lambda = lambda * delta;
+    
+    r_round = resolution * round(r / resolution);
+    if f(y_grid == r_round(2), x_grid == r_round(1)) < threshold
+        break
+    end
+end
