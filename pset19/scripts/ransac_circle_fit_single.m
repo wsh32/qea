@@ -1,4 +1,4 @@
-function [inliers, outliers, center, radius] = ransac_circle_fit_single(points, pointa, pointb, pointc, d, visualize)
+function [inliers, outliers, near_matches, center, radius] = ransac_circle_fit_single(points, pointa, pointb, pointc, d, visualize)
     % lienar regression for center and radius of circle
     A = [
         pointa(1) pointa(2) 1;
@@ -28,9 +28,11 @@ function [inliers, outliers, center, radius] = ransac_circle_fit_single(points, 
     % check if in range
     inlier_indexes = abs(diff_r) <= d;
     outlier_indexes = abs(diff_r) > d;
+    near_match_indexes = (abs(diff_r) < d*2) & ~(abs(diff_r) <= d);
     
     inliers = points(inlier_indexes, :);
     outliers = points(outlier_indexes, :);
+    near_matches = points(near_match_indexes, :);
     
     if visualize == 1
         clf
