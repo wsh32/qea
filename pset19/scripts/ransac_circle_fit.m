@@ -1,4 +1,4 @@
-function [best_endpoints, best_inliers, best_near_matches, best_outliers, c, r] = ransac_circle_fit(points, r_max, d, n, visualize)
+function [best_endpoints, best_inliers, best_outliers, best_near_matches, c, r] = ransac_circle_fit(points, r_max, d, n, visualize)
     best_inliers = [];
     best_outliers = [];
     best_endpoints = [];
@@ -32,6 +32,6 @@ function [best_endpoints, best_inliers, best_near_matches, best_outliers, c, r] 
     end
     
     if found_candidate == 0
-        display("No cirlce found")
+        disp("No circle found")
     end
 end

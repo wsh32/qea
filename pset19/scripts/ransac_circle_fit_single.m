@@ -28,7 +28,7 @@ function [inliers, outliers, near_matches, center, radius] = ransac_circle_fit_s
     % check if in range
     inlier_indexes = abs(diff_r) <= d;
     outlier_indexes = abs(diff_r) > d;
-    near_match_indexes = (abs(diff_r) < d*2) & ~(abs(diff_r) <= d);
+    near_match_indexes = (abs(diff_r) < d*4) & ~(abs(diff_r) <= d);
     
     inliers = points(inlier_indexes, :);
     outliers = points(outlier_indexes, :);
