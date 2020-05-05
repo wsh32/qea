@@ -1,14 +1,14 @@
-function [pos_matrix] = generate_map()
+function [r_pos, circle_center, circle_radius] = generate_map(r, theta)
 
 clear
 clf
 hold on
 
-load('data/gauntlet_scans.mat')
+% load('data/gauntlet_scans.mat')
 warning('off','all')
 
-r = r_all(:,1);
-theta = theta_all(:,1);
+% r = r_all(:,1);
+% theta = theta_all(:,1);
 
 % Plot lidar scan
 r_clean_index = find((r ~= 0) & (r < 3));
@@ -44,10 +44,10 @@ d = 0.01;
 n = 10000;
 r_max = 0.3;
 circle_weight = 1;
-[circle_endpoints, circle_inliers, circle_outliers, near_matches, center, radius] = ransac_circle_fit(points, r_max, d, n, 0);
+[circle_endpoints, circle_inliers, circle_outliers, near_matches, circle_center, circle_radius] = ransac_circle_fit(points, r_max, d, n, 0);
 
 % place sink at circle center
-f = f + circle_weight * log(sqrt((x-center(1)).^2 + (y-center(2)).^2));
+f = f + circle_weight * log(sqrt((x-circle_center(1)).^2 + (y-circle_center(2)).^2));
 
 % find obstacles
 d = 0.01;
@@ -73,7 +73,6 @@ lambda = .75;
 delta = 0.99;
 threshold = -5;
 r_pos = [];
-i = 1;
 while 1
     r_pos = [r_pos; r];
     r_round = resolution * round(r / resolution);
@@ -85,10 +84,9 @@ while 1
     lambda = lambda * delta;
     
     r_round = resolution * round(r / resolution);
-    i = i + 1;
     if f(y_grid == r_round(2), x_grid == r_round(1)) < threshold
         break
     end
 end
-pos_matrix = r_pos;
+
 end
