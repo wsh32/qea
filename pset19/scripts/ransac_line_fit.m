@@ -1,4 +1,4 @@
-function [best_endpoints, best_inliers, best_outliers, m, b] = ransac_line_fit(points, d, n, visualize)
+function [best_endpoints, best_inliers, best_outliers, m, b] = ransac_line_fit(points, d, n, consider_max_dist, visualize)
     best_inliers = [];
     best_outliers = [];
     best_endpoints = [];
@@ -8,7 +8,7 @@ function [best_endpoints, best_inliers, best_outliers, m, b] = ransac_line_fit(p
         
         biggest_gap = max(vecnorm(diff(inliers)'));
         
-        if biggest_gap < 0.2 && length(inliers) > length(best_inliers)
+        if (biggest_gap < 0.2 || consider_max_dist==0) && length(inliers) > length(best_inliers)
             best_inliers = inliers;
             best_outliers = outliers;
             best_endpoints = endpoints;

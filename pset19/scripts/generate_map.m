@@ -30,7 +30,7 @@ n = 500;
 wall_weight = 0.0125;
 % should be 3 walls
 for i=1:3
-    [endpoints, inliers, outliers, m, b] = ransac_line_fit(points, d, n, 0);
+    [endpoints, inliers, outliers, m, b] = ransac_line_fit(points, d, n, 0, 0);
     for j=1:length(inliers)
         f = f - wall_weight * (log(sqrt((x-inliers(j,1)).^2 + (y-inliers(j,2)).^2)));
     end
@@ -39,7 +39,7 @@ end
 
 % Find circle
 d = 0.01;
-n = 10000;
+n = 5000;
 r_max = 0.3;
 circle_weight = 1;
 [circle_endpoints, circle_inliers, circle_outliers, near_matches, circle_center, circle_radius] = ransac_circle_fit(points, r_max, d, n, 0);
@@ -53,7 +53,7 @@ n = 1000;
 obstacle_weight = 0.0125;
 % should be 3 walls
 while length(points) >= 3
-    [endpoints, inliers, outliers, m, b] = ransac_line_fit(points, d, n, 0);
+    [endpoints, inliers, outliers, m, b] = ransac_line_fit(points, d, n, 1, 0);
     for j=1:length(inliers)
         f = f - obstacle_weight * (log(sqrt((x-inliers(j,1)).^2 + (y-inliers(j,2)).^2)));
     end
@@ -82,7 +82,7 @@ while 1
     lambda = lambda * delta;
     
     %if f(y_grid == r_round(2), x_grid == r_round(1)) < threshold
-    distance_from_center = r - circle_center
+    distance_from_center = r - circle_center;
     if norm(distance_from_center) < .1
         r_pos = [r_pos; r];
         break
