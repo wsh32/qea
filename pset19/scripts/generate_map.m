@@ -1,7 +1,5 @@
 function [r_pos, circle_center, circle_radius] = generate_map(r, theta)
 
-clear
-clf
 hold on
 
 % load('data/gauntlet_scans.mat')
@@ -83,8 +81,10 @@ while 1
     %z = double(subs(f, [x, y], [r(1), r(2)]));
     lambda = lambda * delta;
     
-    r_round = resolution * round(r / resolution);
-    if f(y_grid == r_round(2), x_grid == r_round(1)) < threshold
+    %if f(y_grid == r_round(2), x_grid == r_round(1)) < threshold
+    distance_from_center = r - circle_center
+    if norm(distance_from_center) < .1
+        r_pos = [r_pos; r];
         break
     end
 end

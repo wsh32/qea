@@ -1,6 +1,6 @@
 function [best_endpoints, best_inliers, best_outliers, best_near_matches, c, r] = ransac_circle_fit(points, r_max, d, n, visualize)
     best_inliers = [];
-    best_outliers = [];
+    best_outliers = points;
     best_endpoints = [];
     best_near_matches = [];
     found_candidate = 0;
@@ -33,5 +33,6 @@ function [best_endpoints, best_inliers, best_outliers, best_near_matches, c, r] 
     
     if found_candidate == 0
         disp("No circle found")
+        plot(best_outliers(:,1), best_outliers(:,2), 'r.');
     end
 end

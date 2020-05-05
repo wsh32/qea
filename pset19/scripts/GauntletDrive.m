@@ -20,27 +20,29 @@ function GauntletDrive(pos_matrix, circle_center, circle_radius)
 
         angle = atan2(((pos_matrix(i+1,2)-pos_matrix(i,2))),((pos_matrix(i+1,1)-pos_matrix(i,1))));
 
-        turn_time = .5;
+        turn_time = .25;
         angle_turn = angle-old_angle;
         V_lw = (-angle_turn/turn_time)*(.235/2);
         V_rw = (angle_turn/turn_time)*(.235/2);
         msg.Data = [V_lw, V_rw];
         send(pub, msg);
-        pause_rostime(turn_time); %pauses loop while robot runs at this speed
+        pause(turn_time); %pauses loop while robot runs at this speed
 
-        lin_speed = 0.25;
+        lin_speed = 0.5;
         %distance formula
         step_distance = sqrt((pos_matrix(i+1,1)-pos_matrix(i,1))^2 + (pos_matrix(i+1,2)-pos_matrix(i,2))^2);
         step_time =  step_distance / lin_speed;    
         msg.Data = [lin_speed, lin_speed];
         send(pub, msg);
-        pause_rostime(step_time); %pauses loop while robot runs at this speed 
+        pause(step_time); %pauses loop while robot runs at this speed 
 
         distance_from_center = pos_matrix(i, :) - circle_center;
+        pos_matrix(i, :)
+        norm(distance_from_center);
         if norm(distance_from_center) < circle_radius
             msg.Data = [0,0];
             send(pub, msg);
-            display(STOP)
+            display("STOP")
             break
         end
     end
@@ -70,7 +72,7 @@ function GauntletDrive(pos_matrix, circle_center, circle_radius)
         while 1
             elapsed = (rostime('now') - time_start);
             if elapsed.seconds > pause_seconds
-                break
+                break  
             end
             pause(0.01);  % pause slightly to allow "concurrent" programs
         end

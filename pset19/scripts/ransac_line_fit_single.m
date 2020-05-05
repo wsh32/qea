@@ -3,9 +3,9 @@ function [inliers, outliers] = ransac_line_fit_single(points, pointa, pointb, d,
     orthv = [-v(2); v(1)] / norm([-v(2); v(1)]);
     
     % get difference
-    diff = points - pointa;
+    diff_points = points - pointa;
     % project difference onto orthagonal
-    diff_orth = diff * orthv;
+    diff_orth = diff_points * orthv;
     
     % check if in range
     inlier_indexes = abs(diff_orth) <= d;
