@@ -1,3 +1,5 @@
+function [pos_matrix] = generate_map()
+
 clear
 clf
 hold on
@@ -65,12 +67,15 @@ contour(x, y, f, 'ShowText', 'On')
 [u, v] = gradient(f);
 quiver(x, y, -u, -v)
 
-% Find path of robot from orgin
+% Find path of robot from origin
 r = [0 0];
 lambda = .75;
 delta = 0.99;
 threshold = -5;
+r_pos = [];
+i = 1;
 while 1
+    r_pos = [r_pos; r];
     r_round = resolution * round(r / resolution);
     r_grad = -[u(y_grid == r_round(2), x_grid == r_round(1)), v(y_grid == r_round(2), x_grid == r_round(1))] * lambda;
     quiver(r(1), r(2), r_grad(1), r_grad(2), 'c', 'LineWidth', 2, 'MaxHeadSize', 0.5)
@@ -80,7 +85,10 @@ while 1
     lambda = lambda * delta;
     
     r_round = resolution * round(r / resolution);
+    i = i + 1;
     if f(y_grid == r_round(2), x_grid == r_round(1)) < threshold
         break
     end
+end
+pos_matrix = r_pos;
 end
